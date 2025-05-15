@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <title>Outlet - Oddendesiign</title>
+</head>
+<body>
+    <h1>Outlet - Ferdiglagde Logoer</h1>
+    <div>
+        {% for product in products %} <!-- Looper over produktene dynamisk, uans. hvor mange produkter som er i databasen -->
+            <div style="margin-bottom: 20px;">
+                <h3>{{ product.title }}</h3> <!-- Viser produktnavn, bruker Django-templatetaggs for å vise verdiene fra databasen -->
+                <p>Pris: {{ product.price }} kr</p> <!-- Viser prisen på produktet, bruker Django-templatetaggs for å vise verdiene fra databasen -->
+                {% if product.image_url %}
+                    <img src="{{ product.image_url }}" alt="{{ product.title }}" style="max-width: 300px;">
+                {% endif %}
+                <p>{{ product.description }}</p> <!-- Viser beskrivelse av produktet, bruker Django-templatetaggs for å vise verdiene fra databasen -->
+            </div>
+        {% empty %} <!-- Hvis det ikke er noen produkter i databasen, vises denne mld i stedet for en tom side -->
+              <p>Ingen ferdiglagde logoer tilgjengelig for salg.</p>
+        {% endfor %}
+    </div>
+</body>
+</html>
