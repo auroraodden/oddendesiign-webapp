@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    'core', #Registrerer core-appen i Django, slik at Django vet at appen eksisterer
 ]
 
 MIDDLEWARE = [
