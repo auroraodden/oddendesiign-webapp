@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <title>Galleri - Oddendesiign</title>
+</head>
+<body>
+    <h1>Galleri</h1>
+    <div>
+        {% for image in images %} <!-- Viser alle bildene -->
+            <div style="margin-bottom: 20px;">
+                <h3>{{ image.title }}</h3>
+                <img src="{{ image.url }}" alt="{{ image.title }}" style="max-width: 300px;">
+            </div>
+        {% empty %}
+            <p>Ingen bilder i galleriet ennå.</p> <!-- Hvis ingen bilder, vises teksten -->
+        {% endfor %}
+    </div>
+</body>
+</html>
