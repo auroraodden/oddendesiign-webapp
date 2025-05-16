@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <title>Kundeomtaler - Oddendesiign</title>
+</head>
+<body>
+    <h1>Kundeomtaler</h1>
+
+    {% if reviews %}
+        <ul>
+        {% for review in reviews %} <!-- Går gjennom alle kundeomtaler i listen og viser dem -->
+            <li>
+                <strong>{{ review.customer.group_name }}</strong> gir <strong>{{ review.rating}}/5⭐️</strong><br>
+                "{{ review.text }}"<br>
+                <em>Dato: {{ review.created_at|date:"d.m.Y" }}</em>
+            </li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>Ingen kundeomtaler ennå.</p>
+    {% endif %}
+</body>
+</html>

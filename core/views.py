@@ -14,3 +14,9 @@ from .models import Product
 def outlet(request):
     products = Product.objects.filter(is_available=True) # Henter kun produkter som er tilgjengelige for kjøp, ikke utgåtte produkter
     return render(request, 'core/outlet.html', {'products': products}) # Sender listen med produkter videre til en egen html-fil
+
+from .models import Review
+
+def reviews_page(request):
+    reviews = Review.objects.all() # Henter alle anmeldelser fra databasen
+    return render(request, 'core/reviews.html', {'reviews': reviews}) # Sender listen med anmeldelser videre til en egen html-fil (reviews.html)
