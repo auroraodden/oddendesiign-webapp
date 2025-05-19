@@ -21,15 +21,31 @@ def reviews_page(request):
     reviews = Review.objects.all() # Henter alle anmeldelser fra databasen
     return render(request, 'core/reviews.html', {'reviews': reviews}) # Sender listen med anmeldelser videre til en egen html-fil (reviews.html)
 
-from .forms import OrderForm
+from .models import Customer  # Legg denne øverst i filen om den ikke er der
 
 def order_view(request):
-    if request.method == 'POST': # Hvis skjemaet ble sendt inn, validerers det og lagres i databasen
-        form = OrderForm(request.POST, request.FILES) 
+    if request.method == 'POST':
+        form = OrderForm(request.POST, request.FILES)
         if form.is_valid():
-            form.save()
+            order = form.save(commit=False)
+
+            # Opprett ny Customer basert på info i skjemaet
+            customer = Customer.objects.create(
+                group_name=order.group_name,
+                contact_email=order.email,
+                contact_phone=order.phone,
+                address=order.address,
+            )
+
+            # Koble customer til order
+            order.customer = customer
+
+            # Sett total_price basert på valgt produkt
+            if order.product:
+                order.total_price = order.product.price
+
+            order.save()
             return render(request, 'core/order_success.html')
     else:
         form = OrderForm()
-
-    return render(request, 'core/order.html', {'form': form}) # Template-filen som skal vise skjemaet
+    return render(request, 'core/order.html', {'form': form})
