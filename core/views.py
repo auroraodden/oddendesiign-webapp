@@ -2,6 +2,8 @@ from django.shortcuts import render
 from .forms import OrderForm 
 from .models import Customer, GalleryImage, Product, Review
 from django.core.mail import send_mail
+from django.core.mail import EmailMessage
+from django.template.loader import render_to_string
 
 def index(request):
     return render(request, 'core/index.html')
@@ -31,35 +33,37 @@ def order_view(request):
         form = OrderForm(request.POST, request.FILES)
         if form.is_valid():
             order = form.save(commit=False)
-            send_mail(
-                subject='Bekreftelse på bestilling hos Oddendesiign 🎨',
-                message=f'Takk for din bestilling, {order.full_name}!\n\n'
-                f'Produkt: {order.product.title}\n'
-                f'Totalpris: {order.total_price} kr\n\n'
-                f'Vi tar kontakt med deg så snart som mulig.\n\n'
-                f'Mvh,\nOddendesiign',
-                from_email=None,  # bruker DEFAULT_FROM_EMAIL fra settings.py
-                recipient_list=[order.email],  # kunden mottar e-posten
-                fail_silently=False,
-                )
 
-            # Opprett ny Customer basert på info i skjemaet
+            # 1. Opprett Customer
             customer = Customer.objects.create(
                 group_name=order.group_name,
                 contact_email=order.email,
                 contact_phone=order.phone,
                 address=order.address,
             )
-
-            # Koble customer til order
             order.customer = customer
 
-            # Sett total_price basert på valgt produkt
+            # 2. Sett totalpris
             if order.product:
                 order.total_price = order.product.price
 
+            # 3. Lagre bestillingen
             order.save()
-            return render(request, 'core/order_success.html')
+
+            # Nå er alt lagret, og vi sender HTML-e-post
+            html_message = render_to_string('core/emails/order_confirmation.html', {'order': order})
+            email = EmailMessage(
+                subject='Bekreftelse på bestilling hos Oddendesiign 🎨',
+                body=html_message,
+                from_email=None,
+                to=[order.email],
+            )
+            email.content_subtype = "html"
+            email.send()
+
+            return render(request, 'core/order_success.html')  # ⬅️ også inni if-blokken
     else:
         form = OrderForm()
+
     return render(request, 'core/order.html', {'form': form})
+

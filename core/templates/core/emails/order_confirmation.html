@@ -1,0 +1,24 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <title>Ordrebekreftelse</title>
+</head>
+<body style="font-family: Arial, sans-serif; background-color: #f9f9f9; padding: 30px;">
+    <div style="max-width: 600px; margin: auto; background: white; padding: 30px; border-radius: 10px;">
+        <img src="{% static 'images/Oddendesiign_Logo.svg' %}" alt="Oddendesiign logo" style="max-width: 180px; margin-bottom: 20px;"> <!-- Logo -->
+        <h2 style="color: #333;">Hei {{ order.full_name }},</h2>
+        <p>Takk for bestillingen din hos <strong>Oddendesiign</strong>! Her er detaljene:</p>
+
+        <ul>
+            <li><strong>Produkt:</strong> {{ order.product.title }}</li>
+            <li><strong>Totalpris:</strong> {{ order.total_price }} kr</li>
+        </ul>
+
+        <p>Vi tar kontakt med deg så snart som mulig for å bekrefte detaljene og sette i gang prosessen.</p>
+
+        <p>Med vennlig hilsen,<br>Oddendesiign</p>
+    </div>
+</body>
+</html>
