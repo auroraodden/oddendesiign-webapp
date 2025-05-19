@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <title>Bestill logo - Oddendesiign</title>
+</head>
+<body>
+    <h1>Bestill logo</h1>
+
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        {{ form.non_field_errors }}
+
+        <p>{{ form.product.label_tag }} {{ form.product }}</p>
+        <p>{{ form.group_name.label_tag }} {{ form.group_name }}</p>
+        <p>{{ form.concept_description.label_tag }} {{ form.concept_description }}</p>
+        <p>{{ form.uploaded_file.label_tag }} {{ form.uploaded_file }}</p>
+        <p>{{ form.full_name.label_tag }} {{ form.full_name }}</p>
+        <p>{{ form.email.label_tag }} {{ form.email }}</p>
+        <p>{{ form.phone.label_tag }} {{ form.phone }}</p>
+        <p>{{ form.address.label_tag }} {{ form.address }}</p>
+        <p>{{ form.postal_code.label_tag }} {{ form.postal_code }}</p>
+        <p>{{ form.city.label_tag }} {{ form.city }}</p>
+        <p>{{ form.birth_date.label_tag }} {{ form.birth_date }}</p>
+
+        <!-- Link til betingelser -->
+        <p>
+            <label>
+                {{ form.agree_to_terms }} Jeg har lest og godtar 
+                <a href="/betingelser" target="_blank">betingelsene</a>
+            </label>
+        </p>
+
+        <p>{{ form.color_1.label_tag }} {{ form.color_1 }}</p>
+        <p>{{ form.color_2.label_tag }} {{ form.color_2 }}</p>
+        <p>{{ form.color_3.label_tag }} {{ form.color_3 }}</p>
+        <p>{{ form.color_4.label_tag }} {{ form.color_4 }}</p>
+        <p>{{ form.color_5.label_tag }} {{ form.color_5 }}</p>
+        <p>{{ form.total_price.label_tag }} {{ form.total_price }}</p>
+
+        <button type="submit">Bestill</button>
+    </form>
+</body>
+</html>
