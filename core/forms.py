@@ -56,3 +56,9 @@ class OrderForm(forms.ModelForm):
             "agree_to_terms": forms.CheckboxInput(),
             "total_price": forms.NumberInput(attrs={"readonly": "readonly"}),
         }
+
+    def clean_agree_to_terms(self):
+        agreed = self.cleaned_data.get('agree_to_terms')
+        if not agreed:
+            raise forms.ValidationError("Du må godkjenne betingelsene for å kunne bestille.")
+        return agreed
