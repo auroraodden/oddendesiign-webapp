@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from .forms import OrderForm 
 from .models import Customer, GalleryImage, Product, Review
+from django.core.mail import send_mail
 
 def index(request):
     return render(request, 'core/index.html')
@@ -30,6 +31,17 @@ def order_view(request):
         form = OrderForm(request.POST, request.FILES)
         if form.is_valid():
             order = form.save(commit=False)
+            send_mail(
+                subject='Bekreftelse på bestilling hos Oddendesiign 🎨',
+                message=f'Takk for din bestilling, {order.full_name}!\n\n'
+                f'Produkt: {order.product.title}\n'
+                f'Totalpris: {order.total_price} kr\n\n'
+                f'Vi tar kontakt med deg så snart som mulig.\n\n'
+                f'Mvh,\nOddendesiign',
+                from_email=None,  # bruker DEFAULT_FROM_EMAIL fra settings.py
+                recipient_list=[order.email],  # kunden mottar e-posten
+                fail_silently=False,
+                )
 
             # Opprett ny Customer basert på info i skjemaet
             customer = Customer.objects.create(
