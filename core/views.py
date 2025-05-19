@@ -1,4 +1,6 @@
 from django.shortcuts import render
+from .forms import OrderForm 
+from .models import Customer, GalleryImage, Product, Review
 
 def index(request):
     return render(request, 'core/index.html')
