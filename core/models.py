@@ -69,4 +69,42 @@ class GalleryImage(models.Model):
 
     def __str__(self):
         return self.title
+    
+class TeaserProduct(models.Model): # Teaservideo produkter
+    title = models.CharField(max_length=255)
+    description = models.TextField()
+    price = models.DecimalField(max_digits=8, decimal_places=2)
+    is_available = models.BooleanField(default=True)
 
+    def __str__(self):
+        return self.title
+
+class TeaserVideo(models.Model):
+    product = models.ForeignKey(TeaserProduct, on_delete=models.SET_NULL, null=True)
+    group_name = models.CharField(max_length=255)
+    concept_description = models.TextField()
+    video_style = models.CharField(max_length=100)
+    music_preference = models.CharField(max_length=100, blank=True)
+
+    full_name = models.CharField(max_length=255)
+    email = models.EmailField()
+    phone = models.CharField(max_length=20)
+    address = models.TextField()
+    postal_code = models.CharField(max_length=10)
+    city = models.CharField(max_length=100)
+    birth_date = models.DateField()
+
+    agree_to_terms = models.BooleanField(default=False)
+    total_price = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
+
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.group_name} – {self.product}"
+
+class TeaserVideoFile(models.Model): # Flerfil opplasting knyttet til teaservideo-bestilling
+    teaser_video = models.ForeignKey(TeaserVideo, on_delete=models.CASCADE, related_name='files')
+    file = models.FileField(upload_to="uploads/")
+
+    def __str__(self):
+        return self.file.name

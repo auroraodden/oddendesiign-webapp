@@ -2,6 +2,7 @@ from django.contrib import admin
 
 # Register your models here.
 from .models import Customer, Product, Order, Review, GalleryImage, UploadedFile
+from .models import TeaserProduct, TeaserVideo, TeaserVideoFile
 
 @admin.register(Customer)
 class CustomerAdmin(admin.ModelAdmin):
@@ -36,3 +37,21 @@ class ReviewAdmin(admin.ModelAdmin):
 class GalleryImageAdmin(admin.ModelAdmin):
     list_display = ('title', 'uploaded_at') # Viser nevnt
     search_fields = ('title',) # Kan søke på tittel
+
+@admin.register(TeaserProduct)
+class TeaserProductAdmin(admin.ModelAdmin):
+    list_display = ('title', 'price', 'is_available')
+    search_fields = ('title',)
+    list_filter = ('is_available',)
+
+class TeaserVideoFileInline(admin.TabularInline):
+    model = TeaserVideoFile
+    extra = 1
+
+@admin.register(TeaserVideo)
+class TeaserVideoAdmin(admin.ModelAdmin):
+    list_display = ('group_name', 'product', 'full_name', 'created_at')
+    list_filter = ('product', 'created_at')
+    search_fields = ('group_name', 'full_name', 'email', 'product')
+    readonly_fields = ('created_at',)
+    inlines = [TeaserVideoFileInline]
