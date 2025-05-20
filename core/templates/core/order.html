@@ -15,7 +15,13 @@
         <p>{{ form.product.label_tag }} {{ form.product }}</p>
         <p>{{ form.group_name.label_tag }} {{ form.group_name }}</p>
         <p>{{ form.concept_description.label_tag }} {{ form.concept_description }}</p>
-        <p>{{ form.uploaded_file.label_tag }} {{ form.uploaded_file }}</p>
+
+        <!-- Nytt: Filopplasting -->
+        <p>
+             <label for="id_uploaded_files">Last opp filer (valgfritt, du kan velge flere):</label><br>
+             <input type="file" name="uploaded_files" id="id_uploaded_files" multiple>
+        </p>
+
         <p>{{ form.full_name.label_tag }} {{ form.full_name }}</p>
         <p>{{ form.email.label_tag }} {{ form.email }}</p>
         <p>{{ form.phone.label_tag }} {{ form.phone }}</p>

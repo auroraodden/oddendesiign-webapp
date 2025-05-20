@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from .forms import OrderForm 
-from .models import Customer, GalleryImage, Product, Review
+from .models import Customer, GalleryImage, Product, Review, UploadedFile
 from django.core.mail import send_mail
 from django.core.mail import EmailMessage
 from django.template.loader import render_to_string
@@ -50,6 +50,11 @@ def order_view(request):
             # 3. Lagre bestillingen
             order.save()
 
+            # 4. Lagre opplastede filer
+            files = request.FILES.getlist('uploaded_files')
+            for f in files:
+                UploadedFile.objects.create(order=order, file=f)
+
             # Nå er alt lagret -> sender HTML-e-post
             html_message = render_to_string('core/emails/order_confirmation.html', {'order': order})
             email = EmailMessage(
@@ -61,8 +66,8 @@ def order_view(request):
             )
             email.content_subtype = "html"
 
-            if order.uploaded_file: # Hvis kunden har lastet opp en fil
-                email.attach_file(order.uploaded_file.path) # Legger ved filen som ble lastet opp
+            if order.uploaded_files: # Hvis kunden har lastet opp en fil
+                email.attach_file(order.uploaded_files.path) # Legger ved filen som ble lastet opp
 
             email.send()
 

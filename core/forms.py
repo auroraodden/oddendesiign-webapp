@@ -2,13 +2,13 @@ from django import forms
 from .models import Order
 
 class OrderForm(forms.ModelForm):
+    
     class Meta:
         model = Order
         fields = [
             "product",
             "group_name",
             "concept_description",
-            "uploaded_file",
             "full_name",
             "email",
             "phone",
@@ -29,7 +29,6 @@ class OrderForm(forms.ModelForm):
             "product": "Vennligst velg produkt",
             "group_name": "Russenavn",
             "concept_description": "Beskriv ditt konsept",
-            "uploaded_file": "Last opp fil (valgfritt)",
             "full_name": "Fullt navn",
             "email": "E-post",
             "phone": "Telefonnummer",
@@ -62,3 +61,4 @@ class OrderForm(forms.ModelForm):
         if not agreed:
             raise forms.ValidationError("Du må godkjenne betingelsene for å kunne bestille.")
         return agreed
+

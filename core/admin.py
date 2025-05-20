@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 # Register your models here.
-from .models import Customer, Product, Order, Review, GalleryImage
+from .models import Customer, Product, Order, Review, GalleryImage, UploadedFile
 
 @admin.register(Customer)
 class CustomerAdmin(admin.ModelAdmin):
@@ -14,11 +14,17 @@ class ProductAdmin(admin.ModelAdmin):
     list_filter = ('is_available',) # Filtrerer på tilgjengelighet
     search_fields = ('title',) # Kan søke på tittel
 
+class UploadedFileInline(admin.TabularInline):
+    model = UploadedFile
+    extra = 1
+    readonly_fields = ('file',)
+
 @admin.register(Order)
 class OrderAdmin(admin.ModelAdmin):
     list_display = ('customer', 'product', 'created_at', 'is_completed') # Viser nevnt
     list_filter = ('is_completed', 'created_at') # Filtrerer/status på fullført/ikke fullført og dato
     search_fields = ('customer__group_name', 'product__title') # Kan søke nevnt
+    inlines = [UploadedFileInline] # Viser opplastede filer i bestillingen
 
 @admin.register(Review)
 class ReviewAdmin(admin.ModelAdmin):
