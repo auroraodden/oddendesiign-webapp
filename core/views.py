@@ -4,6 +4,9 @@ from .models import Customer, GalleryImage, Product, Review, UploadedFile
 from django.core.mail import send_mail
 from django.core.mail import EmailMessage
 from django.template.loader import render_to_string
+from django.shortcuts import render, redirect
+from .forms import TeaserVideoForm
+from .models import TeaserVideoFile
 
 def index(request):
     return render(request, 'core/index.html')
@@ -76,3 +79,18 @@ def order_view(request):
         form = OrderForm()
 
     return render(request, 'core/order.html', {'form': form})
+
+def teaser_video_view(request):
+    if request.method == 'POST':
+        form = TeaserVideoForm(request.POST)
+        files = request.FILES.getlist('files')  # Henter listen med filer fra skjemaet
+
+        if form.is_valid():
+            teaser = form.save()
+            for f in files:
+                TeaserVideoFile.objects.create(teaser_video=teaser, file=f)
+            return redirect('teaser_video_success')
+    else:
+        form = TeaserVideoForm()
+
+    return render(request, 'core/teaser_video.html', {'form': form})

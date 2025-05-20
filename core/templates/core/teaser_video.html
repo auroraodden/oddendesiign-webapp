@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <title>Bestill teaservideo - Oddendesiign</title>
+</head>
+<body>
+    <h1>Bestill teaservideo</h1>
+    
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+
+        <p>
+            <label for="files">Last opp filer (valgfritt, du kan velge flere):</label><br>
+            <input type="file" name="files" id="files" multiple>
+        </p>
+
+        <button type="submit">Bestill</button>
+    </form>
+</body>
+</html>

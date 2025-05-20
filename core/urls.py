@@ -1,5 +1,6 @@
 from django.urls import path
 from . import views
+from django.shortcuts import render
 
 urlpatterns = [
     path('', views.index, name='index'),
@@ -7,4 +8,6 @@ urlpatterns = [
     path('outlet/', views.outlet, name='outlet'), # Kobler til /outlet/-funksjonen i views.py
     path('reviews/', views.reviews_page, name='reviews'), # Kobler til /reviews/-funksjonen i views.py
     path('order/', views.order_view, name='order'), # Kobler til /order/-funksjonen i views.py
+    path('teaservideo/', views.teaser_video_view, name='teaser_video'), # Kobler til /teaservideo/-funksjonen i views.py
+    path('teaservideo/success/', lambda request: render(request, 'core/teaser_video_success.html'), name='teaser_video_success'),
 ]
