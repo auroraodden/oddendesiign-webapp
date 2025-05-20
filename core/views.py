@@ -50,20 +50,20 @@ def order_view(request):
             # 3. Lagre bestillingen
             order.save()
 
-            # Nå er alt lagret, og vi sender HTML-e-post
+            # Nå er alt lagret -> sender HTML-e-post
             html_message = render_to_string('core/emails/order_confirmation.html', {'order': order})
             email = EmailMessage(
                 subject='Bekreftelse på bestilling hos Oddendesiign 🎨',
                 body=html_message,
                 from_email=None,
-                to=[order.email],
+                to=[order.email], # Kunden mottar e-posten
+                bcc=['oddendesign@gmail.com'], # Jeg får en skjult kopi
             )
             email.content_subtype = "html"
             email.send()
 
-            return render(request, 'core/order_success.html')  # ⬅️ også inni if-blokken
+            return render(request, 'core/order_success.html')  # Viser en egen side for bekreftelse av bestilling
     else:
         form = OrderForm()
 
     return render(request, 'core/order.html', {'form': form})
-
