@@ -83,9 +83,7 @@ def order_view(request):
 
 def teaser_video_view(request):
     if request.method == 'POST':
-        form = TeaserVideoForm(request.POST)
-        files = request.FILES.getlist('files')
-
+        form = TeaserVideoForm(request.POST, request.FILES)
         if form.is_valid():
             teaser = form.save(commit=False)
 
@@ -94,6 +92,7 @@ def teaser_video_view(request):
             
             teaser.save()
 
+            files = request.FILES.getlist('files')
             for f in files:
                 TeaserVideoFile.objects.create(teaser_video=teaser, file=f)
 
@@ -111,9 +110,14 @@ def teaser_video_view(request):
                 bcc=['oddendesign@gmail.com']
             )
             email.attach_alternative(html_content, "text/html")
+
+            for f in teaser.files.all():
+                if f.file:
+                    email.attach_file(f.file.path)
+            
             email.send()
 
-            return redirect('teaser_video_success')
+            return render(request, 'core/teaser_video_success.html')
     else:
         form = TeaserVideoForm()
 
