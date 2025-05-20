@@ -87,7 +87,13 @@ def teaser_video_view(request):
         files = request.FILES.getlist('files')
 
         if form.is_valid():
-            teaser = form.save()
+            teaser = form.save(commit=False)
+
+            if teaser.product:
+                teaser.total_price = teaser.product.price
+            
+            teaser.save()
+
             for f in files:
                 TeaserVideoFile.objects.create(teaser_video=teaser, file=f)
 
