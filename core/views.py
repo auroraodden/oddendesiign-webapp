@@ -7,6 +7,7 @@ from django.template.loader import render_to_string
 from django.shortcuts import render, redirect
 from .forms import TeaserVideoForm
 from .models import TeaserVideoFile
+from django.conf import settings
 
 def index(request):
     return render(request, 'core/index.html')
@@ -89,6 +90,29 @@ def teaser_video_view(request):
             teaser = form.save()
             for f in files:
                 TeaserVideoFile.objects.create(teaser_video=teaser, file=f)
+            
+            # Send e-postbekreftelse
+            subject = f"Bekreftelse på teaservideo-bestilling - {teaser.group_name}"
+            message = (
+                f"Hei {teaser.full_name}!\n\n"
+                f"Takk for at du bestilte teaservideoen «{teaser.product}» hos Oddendesiign 🎬\n\n"
+                f"Vi har registrert:\n"
+                f"• Gruppenavn: {teaser.group_name}\n"
+                f"• E-post: {teaser.email}\n"
+                f"• Telefon: {teaser.phone}\n"
+                f"• Totalpris: {teaser.total_price} kr\n\n"
+                f"Vi tar kontakt når videoen er under produksjon.\n\n"
+                f"Hilsen,\nOddendesiign"
+            )
+
+            send_mail(
+                subject,
+                message,
+                settings.DEFAULT_FROM_EMAIL,
+                [teaser.email],
+                fail_silently=False,
+            )
+
             return redirect('teaser_video_success')
     else:
         form = TeaserVideoForm()
