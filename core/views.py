@@ -23,7 +23,7 @@ def outlet(request):
 from .models import Review
 
 def reviews_page(request):
-    reviews = Review.objects.all() # Henter alle anmeldelser fra databasen
+    reviews = Review.objects.filter(is_approved=True) # Kun godkjente anmeldelser vises
     return render(request, 'core/reviews.html', {'reviews': reviews}) # Sender listen med anmeldelser videre til en egen html-fil (reviews.html)
 
 from .models import Customer  # Legg denne øverst i filen om den ikke er der
