@@ -3,31 +3,37 @@
 <html lang="no">
 <head>
     <meta charset="UTF-8">
-    <title>Bekreftelse på logo-bestilling</title>
+    <title>Ordrebekreftelse</title>
 </head>
-<body style="font-family: Arial; background-color: #f9f9f9; padding: 30px;">
+<body style="font-family: Arial, sans-serif; background-color: #f9f9f9; padding: 30px;">
     <div style="max-width: 600px; margin: auto; background: white; padding: 30px; border-radius: 10px;">
         <img src="https://i.postimg.cc/Y06sdFZ4/Oddendesiign-Logo.png"
              alt="Oddendesiign logo"
              style="max-width: 180px; margin-bottom: 20px;">
 
-        <h2 style="color: #222;">🎨 Oddendesiign – Bekreftelse på logo-bestilling</h2>
+        <h2 style="color: #1D1B33;">🎨 Oddendesiign - Bekreftelse på logo-bestilling</h2>
 
-        <p>Hei {{ order.full_name }},</p>
+        <p style="color: #000000;">Hei {{ order.full_name }},</p>
 
-        <p>Takk for at du har bestilt <strong>{{ order.product.title }}</strong> hos Oddendesiign.</p>
+        <p style="color: #000000;">Takk for at du har bestilt <strong>{{ order.product.title }}</strong> hos Oddendesiign.</p>
 
-        <p><strong>Vi har registrert:</strong></p>
-        <ul>
+        <p style="color: #1D1B33;"><strong>Vi har registrert:</strong></p>
+        <ul style="color: #000000;">
             <li><strong>Gruppenavn:</strong> {{ order.group_name }}</li>
             <li><strong>E-post:</strong> {{ order.email }}</li>
             <li><strong>Telefon:</strong> {{ order.phone }}</li>
             <li><strong>Totalpris:</strong> {{ order.total_price }} kr</li>
         </ul>
 
-        <p>Vi tar kontakt med deg så snart som mulig for å starte prosessen 💬</p>
+        <p style="color: #1D1B33;">Vi tar kontakt med deg så snart som mulig for å starte prosessen 💬</p>
 
-        <p>Hilsen,<br>Oddendesiign</p>
+        <hr style="margin: 40px 0; border: none; border-top: 1px solid #ccc;">
+
+        <p style="font-size: 14px; #1D1B33;">
+            Med vennlig hilsen,<br>
+            <strong>Oddendesiign</strong><br>
+            <a href="https://www.instagram.com/oddendesiign/" style="color: #1D1B33; text-decoration: none;">📸 @oddendesiign</a>
+        </p>
     </div>
 </body>
 </html>
