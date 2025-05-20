@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <title>Bekreftelse på teaservideo</title>
+</head>
+<body style="font-family: Arial; background-color: #f9f9f9; padding: 30px;">
+    <div style="max-width: 600px; margin: auto; background: white; padding: 30px; border-radius: 10px;">
+        <img src="https://i.postimg.cc/Y06sdFZ4/Oddendesiign-Logo.png"
+             alt="Oddendesiign logo"
+             style="max-width: 180px; margin-bottom: 20px;">
+
+        <h2 style="color: #222;">🎬 Oddendesiign – Bekreftelse på teaservideo</h2>
+
+        <p>Hei {{ teaser.full_name }},</p>
+
+        <p>Takk for at du har bestilt teaservideoen <strong>«{{ teaser.product }}»</strong> hos Oddendesiign.</p>
+
+        <p><strong>Vi har registrert:</strong></p>
+        <ul>
+            <li><strong>Gruppenavn:</strong> {{ teaser.group_name }}</li>
+            <li><strong>E-post:</strong> {{ teaser.email }}</li>
+            <li><strong>Telefon:</strong> {{ teaser.phone }}</li>
+            <li><strong>Totalpris:</strong> {{ teaser.total_price }} kr</li>
+        </ul>
+
+        <p>Du vil høre fra oss når videoen er under produksjon 🎥</p>
+
+        <p>Hilsen,<br>Oddendesiign</p>
+    </div>
+</body>
+</html>
