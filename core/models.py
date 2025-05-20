@@ -55,6 +55,7 @@ class Review(models.Model):
     text = models.TextField()
     rating = models.IntegerField(default=5)
     created_at = models.DateTimeField(auto_now_add=True)
+    is_approved = models.BooleanField(default=False) # Godkjenning av anmeldelse
 
     def __str__(self):
         return f"Review by {self.customer}"

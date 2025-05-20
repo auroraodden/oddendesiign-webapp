@@ -22,8 +22,8 @@ class OrderAdmin(admin.ModelAdmin):
 
 @admin.register(Review)
 class ReviewAdmin(admin.ModelAdmin):
-    list_display = ('customer', 'rating', 'created_at') # Viser nevnt
-    list_filter = ('rating',) # Filtrerer på vurdering
+    list_display = ('customer', 'rating', 'created_at', 'is_approved') # Viser nevnt
+    list_filter = ('rating', 'is_approved', 'created_at') # Filtrerer på vurdering
     search_fields = ('customer__group_name', 'text') # Kan søke nevnt
 
 @admin.register(GalleryImage)
