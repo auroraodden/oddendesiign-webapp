@@ -60,6 +60,10 @@ def order_view(request):
                 bcc=['oddendesign@gmail.com'], # Jeg får en skjult kopi
             )
             email.content_subtype = "html"
+
+            if order.uploaded_file: # Hvis kunden har lastet opp en fil
+                email.attach_file(order.uploaded_file.path) # Legger ved filen som ble lastet opp
+
             email.send()
 
             return render(request, 'core/order_success.html')  # Viser en egen side for bekreftelse av bestilling
