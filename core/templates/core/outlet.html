@@ -15,6 +15,7 @@
                     <img src="{{ product.image_url }}" alt="{{ product.title }}" style="max-width: 300px;">
                 {% endif %}
                 <p>{{ product.description }}</p> <!-- Viser beskrivelse av produktet, bruker Django-templatetaggs for å vise verdiene fra databasen -->
+                <a href="{% url 'outlet_order' product.id %}">Kjøp nå</a> <!-- Viser en lenke til bestillingsskjemaet for produktet, bruker Django-templatetaggs for å vise verdiene fra databasen -->
             </div>
         {% empty %} <!-- Hvis det ikke er noen produkter i databasen, vises denne mld i stedet for en tom side -->
               <p>Ingen ferdiglagde logoer tilgjengelig for salg.</p>

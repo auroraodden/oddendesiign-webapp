@@ -2,6 +2,9 @@ from django.shortcuts import render, redirect
 from django.conf import settings
 from django.core.mail import EmailMultiAlternatives
 from django.template.loader import render_to_string
+from .models import OutletOrder
+from .forms import OutletOrderForm
+from django.shortcuts import get_object_or_404
 
 from .forms import OrderForm, TeaserVideoForm
 from .models import (
@@ -23,7 +26,7 @@ def gallery(request):
 # ----------------------------- Outlet -----------------------------
 
 def outlet(request):
-    products = Product.objects.filter(is_available=True)
+    products = Product.objects.filter(is_available=True, is_outlet=True)
     return render(request, 'core/outlet.html', {'products': products})
 
 # ----------------------------- Kundeomtaler -----------------------------
@@ -122,3 +125,37 @@ def teaser_video_view(request):
         form = TeaserVideoForm()
 
     return render(request, 'core/teaser_video.html', {'form': form})
+
+# ----------------------------- FERDIG LOGO-BESTILLING -----------------------------
+
+def outlet_order_view(request, product_id):
+    product = get_object_or_404(Product, pk=product_id, is_available=True, is_outlet=True)
+
+    if request.method == 'POST':
+        form = OutletOrderForm(request.POST)
+        if form.is_valid():
+            order = form.save(commit=False)
+            order.product = product
+            order.total_price = product.price
+            order.save()
+
+            subject = f"Kjøp av ferdig logo - {product.title}"
+            context = {'order': order}
+            html_content = render_to_string('core/emails/order_confirmation.html', context)
+            text_content = f"Takk for kjøpet, {order.full_name}!"
+
+            email = EmailMultiAlternatives(
+                subject=subject,
+                body=text_content,
+                from_email=settings.DEFAULT_FROM_EMAIL,
+                to=[order.email],
+                bcc=['oddendesign@gmail.com']
+            )
+            email.attach_alternative(html_content, "text/html")
+            email.send()
+
+            return render(request, 'core/order_success.html')
+    else:
+        form = OutletOrderForm()
+
+    return render(request, 'core/outlet_order.html', {'form': form, 'product': product})

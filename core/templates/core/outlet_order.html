@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <title>Kjøp ferdig logo - Oddendesiign{{ product.title }}</title>
+</head>
+<body>
+    <h1>Kjøp ferdig logo: {{ product.title }}</h1>
+    <p>Pris: {{ product.price }} kr</p>
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Kjøp nå</button>
+    </form>
+</body>
+</html>

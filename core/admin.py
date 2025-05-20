@@ -11,8 +11,8 @@ class CustomerAdmin(admin.ModelAdmin):
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ('title', 'price', 'is_available') # Viser nevnt
-    list_filter = ('is_available',) # Filtrerer på tilgjengelighet
+    list_display = ('title', 'price', 'is_available', 'is_outlet') # Viser nevnt
+    list_filter = ('is_available', 'is_outlet') # Filtrerer på tilgjengelighet
     search_fields = ('title',) # Kan søke på tittel
 
 class UploadedFileInline(admin.TabularInline):

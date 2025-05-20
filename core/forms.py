@@ -1,6 +1,7 @@
 from django import forms
 from .models import Order
 from .models import TeaserVideo
+from .models import OutletOrder
 
 
 class OrderForm(forms.ModelForm):
@@ -104,6 +105,35 @@ class TeaserVideoForm(forms.ModelForm):
             "agree_to_terms": forms.CheckboxInput(),
             "total_price": forms.NumberInput(attrs={"readonly": "readonly"}),
         }
+    def clean_agree_to_terms(self):
+        agreed = self.cleaned_data.get('agree_to_terms')
+        if not agreed:
+            raise forms.ValidationError("Du må godkjenne betingelsene for å kunne bestille.")
+        return agreed
+
+class OutletOrderForm(forms.ModelForm):
+    class Meta:
+        model = OutletOrder
+        fields = [
+            'full_name', 'email', 'phone',
+            'address', 'postal_code', 'city',
+            'birth_date', 'agree_to_terms'
+        ]
+        labels = {
+            'full_name': 'Fullt navn',
+            'email': 'E-post',
+            'phone': 'Telefonnummer',
+            'address': 'Adresse',
+            'postal_code': 'Postnummer',
+            'city': 'By',
+            'birth_date': 'Fødselsdato',
+            'agree_to_terms': 'Jeg har lest og godtar vilkårene',
+        }
+        widgets = {
+            'birth_date': forms.DateInput(attrs={'type': 'date'}),
+            'agree_to_terms': forms.CheckboxInput(),
+        }
+        
     def clean_agree_to_terms(self):
         agreed = self.cleaned_data.get('agree_to_terms')
         if not agreed:
