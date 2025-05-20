@@ -100,7 +100,7 @@ class TeaserVideo(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f"{self.group_name} – {self.product}"
+        return f"{self.group_name} - {self.product}"
 
 class TeaserVideoFile(models.Model): # Flerfil opplasting knyttet til teaservideo-bestilling
     teaser_video = models.ForeignKey(TeaserVideo, on_delete=models.CASCADE, related_name='files')
