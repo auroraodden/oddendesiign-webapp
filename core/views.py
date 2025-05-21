@@ -173,13 +173,9 @@ def contact_view(request):
             contact = form.save()
             
             subject = f"Oddendesiign: {contact.subject}"
+            context = {'contact': contact}
+            html_content = render_to_string('core/emails/contact_confirmation.html', context)
             text_content = f"Takk for at du kontaktet oss, {contact.full_name}!\n\nVi har mottatt meldingen din og svarer så snart vi kan."
-            html_content = render_to_string('core/emails/contact_confirmation.html', {
-                'full_name': contact.full_name,
-                'email': contact.email,
-                'subject': contact.subject,
-                'message': contact.message,
-            })
 
             email = EmailMultiAlternatives(
                 subject=subject,
@@ -191,7 +187,7 @@ def contact_view(request):
             email.attach_alternative(html_content, "text/html")
             email.send()
 
-            return render(request, 'core/contact_success.html')
+            return redirect('contact_success')
     else:
         form = ContactMessageForm()
 
