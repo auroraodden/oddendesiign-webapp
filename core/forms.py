@@ -2,6 +2,7 @@ from django import forms
 from .models import Order
 from .models import TeaserVideo
 from .models import OutletOrder
+from .models import ContactMessage
 
 
 class OrderForm(forms.ModelForm):
@@ -144,3 +145,27 @@ class OutletOrderForm(forms.ModelForm):
         if not agreed:
             raise forms.ValidationError("Du må godkjenne betingelsene for å kunne bestille.")
         return agreed
+
+class ContactMessageForm(forms.ModelForm):
+    class Meta:
+        model = ContactMessage
+        fields = [
+            'full_name',
+            'email',
+            'subject',
+            'message'
+        ]
+
+        labels = {
+            'full_name': 'Fullt navn',
+            'email': 'E-post',
+            'subject': 'Emne',
+            'message': 'Melding'
+        }
+
+        widgets ={
+            'full_name': forms.TextInput(attrs={"placeholder": "Ditt fulle navn"}),
+            'email': forms.EmailInput(attrs={"placeholder": "din@gmail.no"}),
+            'subject': forms.TextInput(attrs={"placeholder": "Hva gjelder det?"}),
+            'message': forms.Textarea(attrs={"placeholder": "Skriv meldingen din her..."}),
+        }

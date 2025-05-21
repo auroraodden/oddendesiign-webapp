@@ -11,6 +11,7 @@ from .models import (
     Customer, GalleryImage, Product, Review,
     UploadedFile, TeaserVideoFile
 )
+from .forms import ContactMessageForm
 
 # ----------------------------- Startside -----------------------------
 
@@ -162,3 +163,36 @@ def outlet_order_view(request, product_id):
         form = OutletOrderForm()
 
     return render(request, 'core/outlet_order.html', {'form': form, 'product': product})
+
+# ----------------------------- KONTAKTSKJEMA -----------------------------
+
+def contact_view(request):
+    if request.method == 'POST':
+        form = ContactMessageForm(request.POST)
+        if form.is_valid():
+            contact = form.save()
+            
+            subject = f"Oddendesiign: {contact.subject}"
+            text_content = f"Takk for at du kontaktet oss, {contact.full_name}!\n\nVi har mottatt meldingen din og svarer så snart vi kan."
+            html_content = render_to_string('core/emails/contact_confirmation.html', {
+                'full_name': contact.full_name,
+                'email': contact.email,
+                'subject': contact.subject,
+                'message': contact.message,
+            })
+
+            email = EmailMultiAlternatives(
+                subject=subject,
+                body=text_content,
+                from_email=settings.DEFAULT_FROM_EMAIL,
+                to=[contact.email],
+                bcc=['oddendesign@gmail.com']  
+            )
+            email.attach_alternative(html_content, "text/html")
+            email.send()
+
+            return render(request, 'core/contact_success.html')
+    else:
+        form = ContactMessageForm()
+
+    return render(request, 'core/contact.html', {'form': form})

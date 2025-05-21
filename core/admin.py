@@ -1,4 +1,6 @@
 from django.contrib import admin
+from .models import ContactMessage
+
 
 # Register your models here.
 from .models import Customer, Product, Order, Review, GalleryImage, UploadedFile
@@ -55,3 +57,10 @@ class TeaserVideoAdmin(admin.ModelAdmin):
     search_fields = ('group_name', 'full_name', 'email', 'product')
     readonly_fields = ('created_at',)
     inlines = [TeaserVideoFileInline]
+
+@admin.register(ContactMessage)
+class ContactMessageAdmin(admin.ModelAdmin):
+    list_display = ('full_name', 'email', 'subject', 'created_at')
+    search_fields = ('full_name', 'email', 'subject')
+    ordering = ('-created_at',)
+    

@@ -11,4 +11,6 @@ urlpatterns = [
     path('teaservideo/', views.teaser_video_view, name='teaser_video'), # Kobler til /teaservideo/-funksjonen i views.py
     path('teaservideo/success/', lambda request: render(request, 'core/teaser_video_success.html'), name='teaser_video_success'),
     path("outlet/order/<int:product_id>/", views.outlet_order_view, name="outlet_order"),
+    path('contact/', views.contact_view, name='contact'),
+    path('contact/success/', lambda request: render(request, 'core/contact_success.html'), name='contact_success'),
 ]
