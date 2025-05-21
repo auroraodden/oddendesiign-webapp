@@ -139,6 +139,9 @@ def outlet_order_view(request, product_id):
             order.total_price = product.price
             order.save()
 
+            product.is_available = False # Gjør produktet utilgjengelig etter bestilling
+            product.save()
+
             subject = f"Kjøp av ferdig logo - {product.title}"
             context = {'order': order}
             html_content = render_to_string('core/emails/order_confirmation.html', context)
