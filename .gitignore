@@ -178,3 +178,5 @@ cython_debug/
 
 # Ignorer alle filer i uploads-mappen
 uploads/
+
+.venv/
