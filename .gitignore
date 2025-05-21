@@ -175,3 +175,6 @@ cython_debug/
 
 # Sørger for at .env-filen aldri pushes til GitHub
 .env
+
+# Ignorer alle filer i uploads-mappen
+uploads/
