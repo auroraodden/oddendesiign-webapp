@@ -27,6 +27,7 @@ class Order(models.Model):
     custom_description = models.TextField(blank=True) # Beskrivelse av produktet
     created_at = models.DateTimeField(auto_now_add=True)
     is_completed = models.BooleanField(default=False)
+    is_delivered = models.BooleanField(default=False)
     admin_note = models.TextField(blank=True) 
     
     # Feltene som trengs til skjemaet
