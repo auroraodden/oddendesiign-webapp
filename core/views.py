@@ -200,3 +200,8 @@ def faq_view(request):
     faqs = FAQ.objects.all().order_by('display_order')
 
     return render(request, 'core/faq.html', {'faqs': faqs})
+
+# ----------------------------- OM OSS -----------------------------
+
+def about_view(request):
+    return render(request, 'core/about.html')
