@@ -30,6 +30,16 @@ class OrderAdmin(admin.ModelAdmin):
     search_fields = ('customer__group_name', 'product__title') # Kan søke nevnt
     inlines = [UploadedFileInline] # Viser opplastede filer i bestillingen
 
+    fields = (
+        'customer',
+        'product',
+        'total_price',
+        'created_at',
+        'is_completed',
+        'admin_note',
+    )
+    readonly_fields = ('created_at',)
+
 @admin.register(Review)
 class ReviewAdmin(admin.ModelAdmin):
     list_display = ('customer', 'rating', 'created_at', 'is_approved') # Viser nevnt
