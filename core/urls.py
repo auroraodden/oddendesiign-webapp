@@ -15,4 +15,5 @@ urlpatterns = [
     path('contact/success/', lambda request: render(request, 'core/contact_success.html'), name='contact_success'),
     path('faq/', views.faq_view, name='faq'), # Kobler til /faq/-funksjonen i views.py
     path('about/', views.about_view, name='about'), # Kobler til /about/-funksjonen i views.py
+    path('terms/', views.terms_view, name='terms'), # Kobler til /terms/-funksjonen i views.py
 ]

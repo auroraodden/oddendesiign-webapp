@@ -205,3 +205,8 @@ def faq_view(request):
 
 def about_view(request):
     return render(request, 'core/about.html')
+
+# ----------------------------- BETINGELSER OG VILKÅR -----------------------------
+
+def terms_view(request):
+    return render(request, 'core/terms.html')
