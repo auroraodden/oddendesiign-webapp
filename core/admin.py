@@ -26,6 +26,7 @@ class UploadedFileInline(admin.TabularInline):
 @admin.register(Order)
 class OrderAdmin(admin.ModelAdmin):
     list_display = ('customer', 'product', 'created_at', 'is_completed', 'is_delivered') # Viser nevnt
+    ordering = ('-created_at',) # Sorterer etter dato
     list_filter = ('is_completed', 'is_delivered', 'created_at') # Filtrerer/status på fullført/ikke fullført og dato
     search_fields = ('customer__group_name', 'product__title') # Kan søke nevnt
     inlines = [UploadedFileInline] # Viser opplastede filer i bestillingen
