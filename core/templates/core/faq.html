@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <title>FAQ - Oddendesiign</title>
+</head>
+<body>
+    <h1>Ofte stilte spørsmål</h1>
+
+    {% for faq in faqs %}
+        <div style="margin-bottom: 30px;">
+            <h3>{{ faq.question }}</h3>
+            <p>{{ faq.answer }}</p>
+        </div>
+    {% empty %}
+        <p>Ingen spørsmål registrert ennå.</p>
+    {% endfor %}
+</body>
+</html>

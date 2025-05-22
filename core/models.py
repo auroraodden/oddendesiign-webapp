@@ -138,3 +138,12 @@ class ContactMessage(models.Model):
 
     def __str__(self):
         return f"{self.full_name} - {self.subject}"
+
+class FAQ(models.Model):
+    question = models.CharField(max_length=255)
+    answer = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    display_order = models.PositiveIntegerField(default=0)
+
+    def __str__(self):
+        return self.question

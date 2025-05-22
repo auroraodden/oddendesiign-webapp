@@ -5,6 +5,7 @@ from .models import ContactMessage
 # Register your models here.
 from .models import Customer, Product, Order, Review, GalleryImage, UploadedFile
 from .models import TeaserProduct, TeaserVideo, TeaserVideoFile
+from .models import FAQ
 
 @admin.register(Customer)
 class CustomerAdmin(admin.ModelAdmin):
@@ -63,4 +64,8 @@ class ContactMessageAdmin(admin.ModelAdmin):
     list_display = ('full_name', 'email', 'subject', 'created_at')
     search_fields = ('full_name', 'email', 'subject')
     ordering = ('-created_at',)
-    
+
+@admin.register(FAQ)
+class FAQAdmin(admin.ModelAdmin):
+    list_display = ('question', 'display_order')
+    ordering = ('display_order',)
