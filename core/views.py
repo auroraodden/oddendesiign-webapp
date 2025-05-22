@@ -5,6 +5,7 @@ from django.template.loader import render_to_string
 from .models import OutletOrder
 from .forms import OutletOrderForm
 from django.shortcuts import get_object_or_404
+from .models import FAQ
 
 from .forms import OrderForm, TeaserVideoForm
 from .models import (
@@ -192,3 +193,10 @@ def contact_view(request):
         form = ContactMessageForm()
 
     return render(request, 'core/contact.html', {'form': form})
+
+# ----------------------------- FAQ -----------------------------
+
+def faq_view(request):
+    faqs = FAQ.objects.all().order_by('display_order')
+
+    return render(request, 'core/faq.html', {'faqs': faqs})
