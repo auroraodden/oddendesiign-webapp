@@ -1,11 +1,10 @@
 from django.contrib import admin
 from .models import ContactMessage
-
-
-# Register your models here.
 from .models import Customer, Product, Order, Review, GalleryImage, UploadedFile
 from .models import TeaserProduct, TeaserVideo, TeaserVideoFile
 from .models import FAQ
+import csv
+from django.http import HttpResponse
 
 @admin.register(Customer)
 class CustomerAdmin(admin.ModelAdmin):
@@ -30,6 +29,7 @@ class OrderAdmin(admin.ModelAdmin):
     list_filter = ('is_completed', 'is_delivered', 'created_at') # Filtrerer/status på fullført/ikke fullført og dato
     search_fields = ('customer__group_name', 'product__title') # Kan søke nevnt
     inlines = [UploadedFileInline] # Viser opplastede filer i bestillingen
+    actions = ['export_as_csv'] # Legger til eksport handling
 
     fields = (
         'customer',
@@ -41,6 +41,22 @@ class OrderAdmin(admin.ModelAdmin):
         'admin_note',
     )
     readonly_fields = ('created_at',)
+
+    @admin.action(description="Eksporter valgte bestillinger til CSV")
+    def export_as_csv(self, request, queryset):
+        response = HttpResponse(content_type='text/csv')
+        response['Content-Disposition'] = 'attachment; filename="bestillinger.csv"'
+        writer = csv.writer(response)
+        writer.writerow(['Kunde', 'Produkt', 'Opprettet', 'Totalpris', 'Levert'])
+        for order in queryset:
+            writer.writerow([
+                order.customer.group_name,
+                order.product.title,
+                order.created_at.strftime('%Y-%m-%d %H:%M'),
+                order.total_price,
+                'Ja' if order.is_delivered else 'Nei',
+            ])
+        return response            
 
 @admin.register(Review)
 class ReviewAdmin(admin.ModelAdmin):
