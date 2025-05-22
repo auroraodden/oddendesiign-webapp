@@ -61,7 +61,8 @@ class TeaserVideoAdmin(admin.ModelAdmin):
 
 @admin.register(ContactMessage)
 class ContactMessageAdmin(admin.ModelAdmin):
-    list_display = ('full_name', 'email', 'subject', 'created_at')
+    list_display = ('full_name', 'email', 'subject', 'created_at', 'is_answered')
+    list_filter = ('is_answered', 'created_at')
     search_fields = ('full_name', 'email', 'subject')
     ordering = ('-created_at',)
 
