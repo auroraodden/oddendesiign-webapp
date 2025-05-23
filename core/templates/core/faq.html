@@ -1,19 +1,33 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="no">
 <head>
     <meta charset="UTF-8">
-    <title>FAQ - Oddendesiign</title>
+    <title>FAQs - Oddendesiign</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 <body>
-    <h1>Ofte stilte spørsmål</h1>
+    <header class="faq-header">
+        <div class="breadcrumb">Home &gt; <strong>FAQ</strong></div>
+        <h1>FAQs</h1>
+    </header>
+    
+    <main class="faq-wrapper">
+        <h2 class="faq-subtitle">Ofte stilte spørsmål</h2>
 
-    {% for faq in faqs %}
-        <div style="margin-bottom: 30px;">
-            <h3>{{ faq.question }}</h3>
-            <p>{{ faq.answer }}</p>
+        <div class="faq-grid">
+            {% for faq in faqs %}
+                <div class="faq-item">
+                    <button class="faq-question" onclick="this.classList.toggle('active'); this.nextElementSibling.classList.toggle('show');">
+                        {{ faq.question }}
+                        <span class="faq-toggle-icon">⌄</span>
+                    </button>
+                    <div class="faq-answer">{{ faq.answer }}</div>
+                </div>
+            {% empty %}
+                <p>Ingen spørsmål registrert ennå.</p>
+            {% endfor %}
         </div>
-    {% empty %}
-        <p>Ingen spørsmål registrert ennå.</p>
-    {% endfor %}
+    </main>
 </body>
 </html>

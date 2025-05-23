@@ -1,0 +1,88 @@
+/* Generell stil */
+body {
+    font-family: Arial, sans-serif;
+    background-color: f8f8f8;
+    margin: 0;
+    padding: 0;
+    color: #1D1B33;
+}
+
+/* Header stil */
+.faq-header {
+    background-color: #1D1B33;
+    color: white;
+    text-align: center;
+    padding: 40px 20px;
+}
+
+.faq-header h1 {
+    font-size: 48px;
+    margin: 0;
+}
+
+.breadcrumb {
+    font-size: 14px;
+    color: #ccc;
+    margin-bottom: 10px;
+}
+
+/* FAQ-innhold */
+.faq-wrapper {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+.faq-subtitle {
+    font-size: 24px;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.faq-grid {
+    display: grid;
+    gap: 16px;
+}
+
+.faq-item {
+    background: #fff;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+}
+
+.faq.question {
+    width: 100%;
+    background: none;
+    border: none;
+    text-align: left;
+    padding: 16px;
+    font-weight: bold;
+    font-size: 16px;
+    position: relative;
+    cursor: pointer;
+}
+
+.faq-question .faq-toggle-icon {
+    position: absolute;
+    right: 16px;
+    top: 16px;
+    font-size: 18px;
+}
+
+.faq-answer {
+    display: none;
+    padding: 16px;
+    border-top: 1px solid #eee;
+    background-color: fafafa;
+}
+
+.faq-answer.show {
+    display: block;
+}
+
+.faq-question.active {
+    background-color: #1D1B33;
+    color: white;
+}
