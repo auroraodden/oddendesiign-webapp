@@ -47,11 +47,12 @@ class OrderAdmin(admin.ModelAdmin):
         response = HttpResponse(content_type='text/csv')
         response['Content-Disposition'] = 'attachment; filename="bestillinger.csv"'
         writer = csv.writer(response)
-        writer.writerow(['Kunde', 'Produkt', 'Opprettet', 'Totalpris', 'Levert'])
+        writer.writerow(['Kunde', 'Produkt', 'E-post', 'Opprettet', 'Totalpris', 'Levert'])
         for order in queryset:
             writer.writerow([
                 order.customer.group_name,
                 order.product.title,
+                order.email,
                 order.created_at.strftime('%Y-%m-%d %H:%M'),
                 order.total_price,
                 'Ja' if order.is_delivered else 'Nei',
@@ -86,6 +87,43 @@ class TeaserVideoAdmin(admin.ModelAdmin):
     search_fields = ('group_name', 'full_name', 'email', 'product')
     readonly_fields = ('created_at',)
     inlines = [TeaserVideoFileInline]
+    actions = ['export_as_csv']
+
+    fields = (
+        'group_name',
+        'product',
+        'full_name',
+        'email',
+        'phone',
+        'address',
+        'postal_code',
+        'city',
+        'birth_date',
+        'video_style',
+        'music_preference',
+        'concept_description',
+        'total_price',
+        'is_delivered',
+        'created_at',
+        'admin_note',
+    )
+
+    @admin.action(description="Eksporter valgte teaservideoer til CSV")
+    def export_as_csv(self, request, queryset):
+        response = HttpResponse(content_type='text/csv')
+        response['Content-Disposition'] = 'attachment; filename="teaservideoer.csv"'
+        writer = csv.writer(response)
+        writer.writerow(['Kunde', 'Produkt', 'E-post', 'Opprettet', 'Totalpris', 'Levert'])
+        for teaser in queryset:
+            writer.writerow([
+                teaser.group_name,
+                teaser.product.title if teaser.product else 'Ingen',
+                teaser.email,
+                teaser.created_at.strftime('%Y-%m-%d %H:%M'),
+                teaser.total_price,
+                'Ja' if teaser.is_delivered else 'Nei',
+            ])
+        return response
 
 @admin.register(ContactMessage)
 class ContactMessageAdmin(admin.ModelAdmin):
