@@ -68,6 +68,7 @@ body {
 .faq.question {
     width: 100%;
     background: none;
+    transition: background 0.3s ease;
     border: none;
     text-align: left;
     padding: 16px;

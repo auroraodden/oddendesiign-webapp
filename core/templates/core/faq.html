@@ -5,6 +5,14 @@
     <meta charset="UTF-8">
     <title>FAQs - Oddendesiign</title>
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <style>
+        .faq-toggle-icon::after {
+            content: '+';
+        }
+        .faq-question.active faq-toggle-icon::after {
+            content: '-';
+        }
+    </style>    
 </head>
 <body>
     <header class="faq-header">
@@ -20,7 +28,7 @@
                 <div class="faq-item">
                     <button class="faq-question" onclick="this.classList.toggle('active'); this.nextElementSibling.classList.toggle('show');">
                         {{ faq.question }}
-                        <span class="faq-toggle-icon">⌄</span>
+                        <span class="faq-toggle-icon"></span>
                     </button>
                     <div class="faq-answer">{{ faq.answer }}</div>
                 </div>
