@@ -1,20 +1,27 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="no">
 <head>
     <meta charset="UTF-8">
     <title>Om oss - Oddendesiign</title>
+    <link rel="stylesheet" href="{% static 'css/about.css' %}">
 </head>
 <body>
-    <div class="container">
-        <h1>Om Oddendesiign</h1>
 
-        <p><strong>Oddendesiign</strong> er et kreativt designprosjekt som hjelper russegrupper i hele Norge med å få unike logoer og teaservideoer, skreddersydd etter tema og personlighet 🎨✨</p>
+    <header class="about-header">
+    <div class="breadcrumb">Hjem &gt; <strong>Om oss</strong></div>
+    <h1>Om Oddendesiign</h1>
+  </header>
 
-        <p>Prosjektet startet som en Instagram-konto (@oddendesiign), men har vokst til en strukturert webplattform der du kan sende inn bestillinger, se tidligere arbeid, lese kundeomtaler og mer.</p>
+  <section class="about-container">
+    <p><strong>Oddendesiign</strong> er et kreativt designprosjekt som hjelper russegrupper i hele Norge med å få unike logoer og teaservideoer, skreddersydd etter tema og personlighet 🎨✨</p>
 
-        <p>Målet er å gjøre hele prosessen enklere, mer profesjonell og alltid levere med stil og kvalitet.</p>
+    <p>Prosjektet startet som en Instagram-konto (<a href="https://www.instagram.com/oddendesiign/" target="_blank">@oddendesiign</a>), men har vokst til en strukturert webplattform der du kan sende inn bestillinger, se tidligere arbeid, lese kundeomtaler og mer.</p>
 
-        <p>🖥️ Utviklet som eksamensprosjekt i <em>ELE 3921 Web Applications Development</em> ved Handelshøyskolen BI, våren 2025.</p>
-        </div>
+    <p>Målet er å gjøre hele prosessen enklere, mer profesjonell og alltid levere med stil og kvalitet.</p>
+
+    <p>🖥️ Utviklet som eksamensprosjekt i <em>ELE 3921 Web Applications Development</em> ved Handelshøyskolen BI, våren 2025.</p>
+  </section>
+
 </body>
 </html>
