@@ -1,24 +1,48 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="no">
 <head>
-    <meta charset="UTF-8">
-    <title>Kundeomtaler - Oddendesiign</title>
+  <meta charset="UTF-8">
+  <title>Kundeomtaler – Oddendesiign</title>
+  <link rel="stylesheet" href="{% static 'css/reviews.css' %}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
-    <h1>Kundeomtaler</h1>
+
+  <section class="reviews-section">
+    <h2>Kundeomtaler</h2>
 
     {% if reviews %}
-        <ul>
-        {% for review in reviews %} <!-- Går gjennom alle kundeomtaler i listen og viser dem -->
-            <li>
-                <strong>{{ review.customer.group_name }}</strong> gir <strong>{{ review.rating}}/5⭐️</strong><br>
-                "{{ review.text }}"<br>
-                <em>Dato: {{ review.created_at|date:"d.m.Y" }}</em>
-            </li>
-        {% endfor %}
-        </ul>
+      <div class="review-carousel">
+        <button class="carousel-btn prev" onclick="prevReview()">‹</button>
+
+        <div id="review-wrapper">
+          {% for review in reviews %}
+            <div class="review-card {% if forloop.first %}active{% endif %}">
+              <div class="rating">
+                {% for i in "12345"|slice:":review.rating" %}
+                  <span class="star">★</span>
+                {% endfor %}
+              </div>
+              <p class="review-text">“{{ review.text }}”</p>
+              <p class="review-author">{{ review.customer.group_name }} - {{ review.created_at|date:"d.m.Y" }}</p>
+            </div>
+          {% endfor %}
+        </div>
+
+        <button class="carousel-btn prev" onclick="prevReview()">
+            <i class="fa-solid fa-chevron-left"></i>
+        </button>
+        <button class="carousel-btn next" onclick="nextReview()">
+            <i class="fa-solid fa-chevron-right"></i>
+        </button>
+
+      </div>
     {% else %}
-        <p>Ingen kundeomtaler ennå.</p>
+      <p class="no-reviews">Ingen kundeomtaler ennå.</p>
     {% endif %}
+  </section>
+
+  <script src="{% static 'js/reviews.js' %}"></script>
 </body>
 </html>
