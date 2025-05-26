@@ -3,39 +3,28 @@
 <html lang="no">
 <head>
     <meta charset="UTF-8">
-    <title>FAQs - Oddendesiign</title>
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
-    <style>
-        .faq-toggle-icon::after {
-            content: '+';
-        }
-        .faq-question.active faq-toggle-icon::after {
-            content: '-';
-        }
-    </style>    
+    <title>Ofte stilte spørsmål - Oddendesiign</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" />
+    <link rel="stylesheet" href="{% static 'css/faq.css' %}">
 </head>
 <body>
-    <header class="faq-header">
-        <div class="breadcrumb">Home &gt; <strong>FAQ</strong></div>
-        <h1>FAQs</h1>
-    </header>
-    
-    <main class="faq-wrapper">
-        <h2 class="faq-subtitle">Lurer du på noe?<br>Her finner du svarene</h2>
 
-        <div class="faq-grid">
-            {% for faq in faqs %}
-                <div class="faq-item">
-                    <button class="faq-question" onclick="this.classList.toggle('active'); this.nextElementSibling.classList.toggle('show');">
-                        {{ faq.question }}
-                        <span class="faq-toggle-icon"></span>
-                    </button>
-                    <div class="faq-answer">{{ faq.answer }}</div>
-                </div>
-            {% empty %}
-                <p>Ingen spørsmål registrert ennå.</p>
-            {% endfor %}
+<section>
+    <h1 class="title">Ofte stilte spørsmål</h1>
+
+    <div class="questions-container">
+        {% for faq in faqs %}
+        <div class="question">
+            <button type="button">
+                <span>{{ faq.question }}</span>
+                <i class="fas fa-chevron-down d-arrow"></i>
+            </button>
+            <p>{{ faq.answer }}</p>
         </div>
-    </main>
+        {% endfor %}
+    </div>
+</section>
+
+<script src="{% static 'js/faq.js' %}"></script>
 </body>
 </html>
