@@ -1,22 +1,77 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="no">
 <head>
     <meta charset="UTF-8">
     <title>Bestill teaservideo - Oddendesiign</title>
+    <link rel="stylesheet" href="{% static 'css/order.css' %}">
 </head>
 <body>
-    <h1>Bestill teaservideo</h1>
-    
-    <form method="post" enctype="multipart/form-data">
+
+  <div class="order-container">
+    <!-- VENSTRE: Kontaktinfo -->
+    <div class="order-info">
+      <h2>Kontakt</h2>
+      <p><strong>E-post:</strong><br> oddendesign@gmail.com</p>
+      <p><strong>Instagram:</strong><br>
+        <a href="https://www.instagram.com/oddendesiign/" target="_blank">@oddendesiign</a>
+      </p>
+      <p><strong>Adresse:</strong><br> Handelshøyskolen BI<br>Oslo, Norge</p>
+    </div>
+
+    <!-- HØYRE: Skjema -->
+    <div class="order-form">
+      <h2>Bestill teaservideo</h2>
+      <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
-        {{ form.as_p }}
+        {{ form.non_field_errors }}
 
-        <p>
-            <label for="files">Last opp filer (valgfritt, du kan velge flere):</label><br>
-            <input type="file" name="files" id="files" multiple>
-        </p>
+        <!-- Produktvalg -->
+        <div class="form-group">
+          <label for="id_product">Velg teaserprodukt:</label>
+          <select name="product" id="id_product">
+            {% for product in form.fields.product.queryset %}
+              <option value="{{ product.pk }}" data-price="{{ product.price }}">
+                {{ product }}
+              </option>
+            {% endfor %}
+          </select>
+        </div>
 
-        <button type="submit">Bestill</button>
-    </form>
+        <!-- Totalpris -->
+        <div class="form-group">
+          <label>Totalt:</label>
+          <p><strong><span id="price-output">-</span> kr</strong></p>
+        </div>
+
+        <!-- Skjult felt for innsending -->
+        <div style="display: none;">
+          {{ form.total_price }}
+        </div>
+
+        <div class="form-group">{{ form.group_name.label_tag }} {{ form.group_name }}</div>
+        <div class="form-group">{{ form.full_name.label_tag }} {{ form.full_name }}</div>
+        <div class="form-group">{{ form.email.label_tag }} {{ form.email }}</div>
+        <div class="form-group">{{ form.phone.label_tag }} {{ form.phone }}</div>
+
+        <!-- Opplasting -->
+        <div class="form-group">
+          <label for="files">Last opp filer (valgfritt):</label>
+          <input type="file" name="files" id="files" multiple>
+        </div>
+
+        <div class="form-group">
+          <label>
+            {{ form.agree_to_terms }} Jeg godtar
+            <a href="/betingelser" target="_blank">betingelsene</a>
+          </label>
+        </div>
+
+        <button type="submit" class="submit-btn">Bestill</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="{% static 'js/teaser_video.js' %}"></script>
 </body>
 </html>
