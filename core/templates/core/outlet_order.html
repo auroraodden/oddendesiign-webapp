@@ -1,17 +1,55 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="no">
 <head>
-    <meta charset="UTF-8">
-    <title>Kjøp ferdig logo - Oddendesiign{{ product.title }}</title>
+  <meta charset="UTF-8">
+  <title>Kjøp ferdig logo - Oddendesiign</title>
+  <link rel="stylesheet" href="{% static 'css/order.css' %}">
 </head>
 <body>
-    <h1>Kjøp ferdig logo: {{ product.title }}</h1>
-    <p>Pris: {{ product.price }} kr</p>
 
-    <form method="post">
+  <div class="order-container">
+    <!-- VENSTRE: Kontaktinfo -->
+    <div class="order-info">
+      <h2>Kontakt</h2>
+      <p><strong>E-post:</strong><br> oddendesign@gmail.com</p>
+      <p><strong>Instagram:</strong><br>
+        <a href="https://www.instagram.com/oddendesiign/" target="_blank">@oddendesiign</a>
+      </p>
+      <p><strong>Adresse:</strong><br> Handelshøyskolen BI<br>Oslo, Norge</p>
+    </div>
+
+    <!-- HØYRE: Skjema -->
+    <div class="order-form">
+      <h2>Kjøp ferdig logo</h2>
+      <p><strong>{{ product.title }}</strong></p>
+      <p>Pris: <strong>{{ product.price }} kr</strong></p>
+
+      <form method="post">
         {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Kjøp nå</button>
-    </form>
+        {{ form.non_field_errors }}
+
+        <div class="form-group">{{ form.full_name.label_tag }} {{ form.full_name }}</div>
+        <div class="form-group">{{ form.email.label_tag }} {{ form.email }}</div>
+        <div class="form-group">{{ form.phone.label_tag }} {{ form.phone }}</div>
+        <div class="form-group">{{ form.address.label_tag }} {{ form.address }}</div>
+        <div class="form-group">{{ form.postal_code.label_tag }} {{ form.postal_code }}</div>
+        <div class="form-group">{{ form.city.label_tag }} {{ form.city }}</div>
+        <div class="form-group">{{ form.birth_date.label_tag }} {{ form.birth_date }}</div>
+
+        <div class="form-group">
+          <label>
+            {{ form.agree_to_terms }} Jeg godtar
+            <a href="/betingelser" target="_blank">betingelsene</a>
+          </label>
+        </div>
+
+        <div class="form-group">{{ form.total_price.label_tag }} {{ form.total_price }}</div>
+
+        <button type="submit" class="submit-btn">Kjøp nå</button>
+      </form>
+    </div>
+  </div>
+
 </body>
 </html>
