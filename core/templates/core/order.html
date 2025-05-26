@@ -1,51 +1,88 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="no">
 <head>
-    <meta charset="UTF-8">
-    <title>Bestill logo - Oddendesiign</title>
+  <meta charset="UTF-8">
+  <title>Bestill logo - Oddendesiign</title>
+  <link rel="stylesheet" href="{% static 'css/order.css' %}">
 </head>
 <body>
-    <h1>Bestill logo</h1>
 
-    <form method="post" enctype="multipart/form-data">
+  <div class="order-container">
+    <!-- VENSTRE: Kontaktinfo -->
+    <div class="order-info">
+      <h2>Kontakt</h2>
+      <p><strong>E-post:</strong><br> oddendesign@gmail.com</p>
+      <p><strong>Instagram:</strong><br>
+        <a href="https://www.instagram.com/oddendesiign/" target="_blank">@oddendesiign</a>
+      </p>
+      <p><strong>Adresse:</strong><br> Handelshøyskolen BI<br>Oslo, Norge</p>
+    </div>
+
+    <!-- HØYRE: Skjema -->
+    <div class="order-form">
+      <h2>Bestill logo</h2>
+      <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
-
         {{ form.non_field_errors }}
 
-        <p>{{ form.product.label_tag }} {{ form.product }}</p>
-        <p>{{ form.group_name.label_tag }} {{ form.group_name }}</p>
-        <p>{{ form.concept_description.label_tag }} {{ form.concept_description }}</p>
+        <!-- Produktvalg med pris -->
+        <div class="form-group">
+          <label for="id_product">Velg pakke:</label>
+          <select name="product" id="id_product">
+            {% for product in form.fields.product.queryset %}
+              <option value="{{ product.pk }}" data-price="{{ product.price }}">
+                {{ product }}
+              </option>
+            {% endfor %}
+          </select>
+        </div>
 
-        <!-- Nytt: Filopplasting -->
-        <p>
-             <label for="id_uploaded_files">Last opp filer (valgfritt, du kan velge flere):</label><br>
-             <input type="file" name="uploaded_files" id="id_uploaded_files" multiple>
-        </p>
+        <!-- Visning av totalpris -->
+        <div class="form-group">
+          <label>Totalt:</label>
+          <p><strong><span id="price-output">-</span> kr</strong></p>
+        </div>
 
-        <p>{{ form.full_name.label_tag }} {{ form.full_name }}</p>
-        <p>{{ form.email.label_tag }} {{ form.email }}</p>
-        <p>{{ form.phone.label_tag }} {{ form.phone }}</p>
-        <p>{{ form.address.label_tag }} {{ form.address }}</p>
-        <p>{{ form.postal_code.label_tag }} {{ form.postal_code }}</p>
-        <p>{{ form.city.label_tag }} {{ form.city }}</p>
-        <p>{{ form.birth_date.label_tag }} {{ form.birth_date }}</p>
+        <!-- Skjult input for totalpris -->
+        <div style="display: none;">
+          {{ form.total_price }}
+        </div>
 
-        <!-- Link til betingelser -->
-        <p>
-            <label>
-                {{ form.agree_to_terms }} Jeg har lest og godtar 
-                <a href="/betingelser" target="_blank">betingelsene</a>
-            </label>
-        </p>
+        <div class="form-group">{{ form.group_name.label_tag }} {{ form.group_name }}</div>
+        <div class="form-group">{{ form.concept_description.label_tag }} {{ form.concept_description }}</div>
 
-        <p>{{ form.color_1.label_tag }} {{ form.color_1 }}</p>
-        <p>{{ form.color_2.label_tag }} {{ form.color_2 }}</p>
-        <p>{{ form.color_3.label_tag }} {{ form.color_3 }}</p>
-        <p>{{ form.color_4.label_tag }} {{ form.color_4 }}</p>
-        <p>{{ form.color_5.label_tag }} {{ form.color_5 }}</p>
-        <p>{{ form.total_price.label_tag }} {{ form.total_price }}</p>
+        <div class="form-group">
+          <label for="id_uploaded_files">Last opp filer (valgfritt):</label>
+          <input type="file" name="uploaded_files" id="id_uploaded_files" multiple>
+        </div>
 
-        <button type="submit">Bestill</button>
-    </form>
+        <div class="form-group">{{ form.full_name.label_tag }} {{ form.full_name }}</div>
+        <div class="form-group">{{ form.email.label_tag }} {{ form.email }}</div>
+        <div class="form-group">{{ form.phone.label_tag }} {{ form.phone }}</div>
+        <div class="form-group">{{ form.address.label_tag }} {{ form.address }}</div>
+        <div class="form-group">{{ form.postal_code.label_tag }} {{ form.postal_code }}</div>
+        <div class="form-group">{{ form.city.label_tag }} {{ form.city }}</div>
+        <div class="form-group">{{ form.birth_date.label_tag }} {{ form.birth_date }}</div>
+
+        <div class="form-group">
+          <label>
+            {{ form.agree_to_terms }} Jeg godtar
+            <a href="/betingelser" target="_blank">betingelsene</a>
+          </label>
+        </div>
+
+        <div class="form-group">{{ form.color_1.label_tag }} {{ form.color_1 }}</div>
+        <div class="form-group">{{ form.color_2.label_tag }} {{ form.color_2 }}</div>
+        <div class="form-group">{{ form.color_3.label_tag }} {{ form.color_3 }}</div>
+        <div class="form-group">{{ form.color_4.label_tag }} {{ form.color_4 }}</div>
+        <div class="form-group">{{ form.color_5.label_tag }} {{ form.color_5 }}</div>
+
+        <button type="submit" class="submit-btn">Bestill nå</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="{% static 'js/order.js' %}"></script>
 </body>
 </html>
