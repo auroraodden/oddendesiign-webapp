@@ -1,11 +1,23 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="no">
 <head>
     <meta charset="UTF-8">
     <title>Henvendelse sendt - Oddendesiign</title>
+    <link rel="stylesheet" href="{% static 'css/order_success.css' %}">
 </head>
 <body>
-    <h1>Takk for meldingen din📩</h1>
+
+  <div class="success-card">
+    <img src="https://i.postimg.cc/KzMQmrqj/Oddendesiign-Logo.png" alt="Logo" class="logo">
+
+    <div class="check-circle">✓</div>
+
+    <h1>Vi har mottatt meldingen din!</h1>
     <p>Vi har mottatt henvendelsen din og svarer deg så snart vi kan.</p>
+
+    <a href="/" class="back-btn">Tilbake til forsiden</a>
+  </div>
+
 </body>
 </html>

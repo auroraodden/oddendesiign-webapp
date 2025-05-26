@@ -131,3 +131,6 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = config('EMAIL_HOST_USER') # Min Gmail-adresse fra .env-filen
 EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD') # Google App passordet fra .env-filen
 DEFAULT_FROM_EMAIL = config('EMAIL_HOST_USER') # Det som vises som avsender i e-posten
+
+MEDIA_URL = '/media/' # URL for tilgang til opplastede filer via nettleseren
+MEDIA_ROOT = BASE_DIR / 'media' # Mappen der opplastede filer lagres
