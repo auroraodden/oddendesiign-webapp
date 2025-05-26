@@ -1,11 +1,23 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="no">
 <head>
     <meta charset="UTF-8">
     <title>Bestilling fullført - Oddendesiign</title>
+    <link rel="stylesheet" href="{% static 'css/order_success.css' %}">
 </head>
 <body>
-    <h1>Takk for bestillingen🎉</h1>
-    <p>Du vil snart motta en bekreftelse på e-post.</p>
+
+  <div class="success-card">
+    <img src="https://i.postimg.cc/KzMQmrqj/Oddendesiign-Logo.png" alt="Logo" class="logo">
+
+    <div class="check-circle">✓</div>
+
+    <h1>Teaservideo-bestillingen er mottatt!</h1>
+    <p>Du vil motta en bekreftelse på e-post innen kort tid.</p>
+
+    <a href="/" class="back-btn">Tilbake til forsiden</a>
+  </div>
+
 </body>
 </html>
