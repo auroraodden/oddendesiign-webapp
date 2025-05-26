@@ -2,29 +2,54 @@
 <!DOCTYPE html>
 <html lang="no">
 <head>
-    <meta charset="UTF-8">
-    <title>Ofte stilte spørsmål - Oddendesiign</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" />
-    <link rel="stylesheet" href="{% static 'css/faq.css' %}">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FAQ - Oddendesiign</title>
+  <link rel="stylesheet" href="{% static 'css/faq.css' %}" />
 </head>
 <body>
 
-<section>
-    <h1 class="title">Ofte stilte spørsmål</h1>
+  <!-- Header -->
+  <header class="faq-header">
+    <div class="faq-breadcrumb">Hjem &gt; <strong>FAQ</strong></div>
+    <h1 class="faq-page-title">FAQs</h1>
+  </header>
 
-    <div class="questions-container">
-        {% for faq in faqs %}
-        <div class="question">
-            <button type="button">
-                <span>{{ faq.question }}</span>
-                <i class="fas fa-chevron-down d-arrow"></i>
-            </button>
-            <p>{{ faq.answer }}</p>
+  <!-- FAQ Wrapper -->
+  <div class="faq-wrapper">
+    <h2 class="faq-heading">Ofte stilte spørsmål</h2>
+
+    <div class="faq-list">
+      <!-- FAQ 1 -->
+      <div class="faq-box">
+        <button onclick="toggleFAQ(1)" class="faq-toggle">
+          <span>Sender dere internasjonalt?</span>
+          <span class="faq-icons">
+            <span id="icon-plus-1">+</span>
+            <span id="icon-minus-1" class="hidden">−</span>
+          </span>
+        </button>
+        <div id="answer-1" class="faq-answer hidden">
+          <p>Ja, vi sender til over 50 land. Frakt beregnes ved utsjekk.</p>
         </div>
-        {% endfor %}
-    </div>
-</section>
+      </div>
 
-<script src="{% static 'js/faq.js' %}"></script>
+      <!-- FAQ 2 -->
+      <div class="faq-box">
+        <button onclick="toggleFAQ(2)" class="faq-toggle">
+          <span>Kan jeg endre bestillingen min?</span>
+          <span class="faq-icons">
+            <span id="icon-plus-2">+</span>
+            <span id="icon-minus-2" class="hidden">−</span>
+          </span>
+        </button>
+        <div id="answer-2" class="faq-answer hidden">
+          <p>Du kan endre innen 24 timer. Kontakt oss så fort som mulig!</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="{% static 'js/faq.js' %}"></script>
 </body>
 </html>

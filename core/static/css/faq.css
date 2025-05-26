@@ -1,66 +1,80 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
 body {
-    font-family: 'Open Sans', sans-serif;
-    color: #fff;
-    background-color: #1D1B33;
+  font-family: 'Arial', sans-serif;
+  background-color: #f8f8f8;
+  margin: 0;
+  padding: 40px 20px;
 }
 
-.title {
-    font-size: 50px;
-    text-align: center;
-    margin-top: 80px;
-    margin-bottom: 40px;
-    text-decoration: underline 4px;
+.faq-wrapper {
+  max-width: 800px;
+  margin: 0 auto;
 }
 
-.question.container {
-    max-width: 800px;
-    margin: 0 auto;
+.faq-heading {
+  font-size: 2.5rem;
+  text-align: center;
+  margin-bottom: 2rem;
+  color: #1D1B33;
 }
 
-.question {
-    border-bottom: 1px solid #fff;
+.faq-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
-.question button {
-    width: 100%;
-    background-color: #1D1B33;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px 15px;
-    border: none;
-    outline: none;
-    color: #fff;
-    font-weight: 700;
-    cursor: pointer;
+.faq-box {
+  background: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
 
-.question p {
-    font-size: 20px;
-    max-height: 0;
-    opacity: 0;
-    line-height: 1.5;
-    overflow: hidden;
-    transition: all 0.5s ease;
+.faq-toggle {
+  width: 100%;
+  padding: 16px 20px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #1D1B33;
+  background: none;
+  border: none;
+  text-align: left;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
 }
 
-.d-arrow {
-    transition: transform 0.3s ease;
-    color: #fff;
+.faq-icons {
+  font-size: 1.25rem;
+  width: 24px;
+  text-align: center;
 }
 
-.question p.show {
-    max-height: 300px;
-    opacity: 1;
-    padding: 0px 15px 30px 15px;
+.faq-answer {
+  padding: 0 20px 20px 20px;
+  font-size: 1rem;
+  color: #333;
 }
 
-.question button .d-arrow.rotate {
-    transform: rotate(180deg);
+.hidden {
+  display: none;
+}
+.faq-header {
+  background-color: #1D1B33;
+  color: white;
+  text-align: center;
+  padding: 60px 20px;
+}
+
+.faq-breadcrumb {
+  font-size: 0.9rem;
+  color: #ccc;
+  margin-bottom: 10px;
+}
+
+.faq-page-title {
+  font-size: 3rem;
+  font-weight: 800;
+  margin: 0;
+  font-family: 'Arial', sans-serif;
 }

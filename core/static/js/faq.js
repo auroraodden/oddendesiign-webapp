@@ -1,24 +1,18 @@
-const buttons = document.querySelectorAll('.question button');
+function toggleFAQ(id) {
+  const answer = document.getElementById(`answer-${id}`);
+  const plus = document.getElementById(`icon-plus-${id}`);
+  const minus = document.getElementById(`icon-minus-${id}`);
+  const isOpen = !answer.classList.contains("hidden");
 
-buttons.forEach(button => {
-    button.addEventListener('click', () => {
-        const answer = button.nextElementSibling;
-        const icon = button.querySelector('.d-arrow');
+  // Lukk alle først
+  document.querySelectorAll(".faq-answer").forEach(el => el.classList.add("hidden"));
+  document.querySelectorAll("[id^='icon-plus-']").forEach(el => el.classList.remove("hidden"));
+  document.querySelectorAll("[id^='icon-minus-']").forEach(el => el.classList.add("hidden"));
 
-        // Lukk alle andre åpne først
-        document.querySelectorAll('.question p.show').forEach(p => {
-            if (p !== answer) {
-                p.classList.remove('show');
-                p.style.maxHeight = null;
-                const otherIcon = p.previousElementSibling.querySelector('.d-arrow');
-                if (otherIcon) {
-                    otherIcon.classList.remove('rotate');
-                }
-            }
-        });
-
-        // Toggle valgt
-        answer.classList.toggle('show');
-        icon.classList.toggle('rotate');
-    });
-});
+  // Åpne valgt hvis den ikke var åpen
+  if (!isOpen) {
+    answer.classList.remove("hidden");
+    plus.classList.add("hidden");
+    minus.classList.remove("hidden");
+  }
+}
