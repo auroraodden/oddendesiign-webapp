@@ -1,22 +1,40 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="no">
 <head>
     <meta charset="UTF-8">
     <title>Kontakt oss - Oddendesiign</title>
+    <link rel="stylesheet" href="{% static 'css/order.css' %}">
 </head>
 <body>
-    <h1>Kontakt oss</h1>
 
-    <form method="post">
+  <div class="order-container">
+    <!-- VENSTRE: Kontaktinfo -->
+    <div class="order-info">
+      <h2>Kontakt</h2>
+      <p><strong>E-post:</strong><br> oddendesign@gmail.com</p>
+      <p><strong>Instagram:</strong><br>
+        <a href="https://www.instagram.com/oddendesiign/" target="_blank">@oddendesiign</a>
+      </p>
+      <p><strong>Adresse:</strong><br> Handelshøyskolen BI<br>Oslo, Norge</p>
+    </div>
+
+    <!-- HØYRE: Kontaktskjema -->
+    <div class="order-form">
+      <h2>Kontakt oss</h2>
+      <form method="post">
         {% csrf_token %}
         {{ form.non_field_errors }}
 
-        <p>{{ form.full_name.label_tag }} {{ form.full_name }}</p>
-        <p>{{ form.email.label_tag }} {{ form.email }}</p>
-        <p>{{ form.subject.label_tag }} {{ form.subject }}</p>
-        <p>{{ form.message.label_tag }} {{ form.message }}</p>
+        <div class="form-group">{{ form.full_name.label_tag }} {{ form.full_name }}</div>
+        <div class="form-group">{{ form.email.label_tag }} {{ form.email }}</div>
+        <div class="form-group">{{ form.subject.label_tag }} {{ form.subject }}</div>
+        <div class="form-group">{{ form.message.label_tag }} {{ form.message }}</div>
 
-        <button type="submit">Send</button>
-    </form>
+        <button type="submit" class="submit-btn">Send</button>
+      </form>
+    </div>
+  </div>
+
 </body>
 </html>
