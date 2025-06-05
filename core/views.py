@@ -17,8 +17,12 @@ from .forms import ContactMessageForm
 # ----------------------------- Startside -----------------------------
 
 def index(request):
-    return render(request, 'core/index.html')
-
+    outlet_products = Product.objects.filter(is_outlet=True, is_available=True)[:3]
+    faqs = FAQ.objects.all().order_by('display_order')[:6]
+    reviews = Review.objects.filter(is_approved=True).order_by('-created_at')[:5]
+    contact_form = ContactMessageForm()
+    return render(request, 'core/index.html', {'products': outlet_products, 'faqs': faqs, 'reviews': reviews, 'form': contact_form})
+    
 # ----------------------------- Galleri -----------------------------
 
 def gallery(request):

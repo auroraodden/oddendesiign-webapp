@@ -5,25 +5,71 @@
   <meta charset="UTF-8">
   <title>Kjøp ferdig logo - Oddendesiign</title>
   <link rel="stylesheet" href="{% static 'css/order.css' %}">
+  <style>
+    .product-order-wrapper {
+      display: flex;
+      gap: 4rem;
+      max-width: 1000px;
+      margin: 4rem auto;
+      padding: 2rem;
+      background-color: #fff;
+      border-radius: 16px;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+    }
+
+    .product-preview {
+      flex: 1;
+    }
+
+    .product-preview img {
+      max-width: 100%;
+      border-radius: 10px;
+      margin-bottom: 1rem;
+    }
+
+    .order-form {
+      flex: 1;
+    }
+
+    .order-form h2 {
+      margin-bottom: 1rem;
+    }
+
+    .back-btn {
+      display: inline-block;
+      margin-top: 1rem;
+      color: #1D1B33;
+      text-decoration: none;
+      font-weight: 600;
+      padding: 10px 20px;
+      border-radius: 8px;
+      background-color: transparent;
+      border: 2px solid #1D1B33;
+      transition: all 0.3s ease;
+    }
+
+    .back-btn:hover {
+      background-color: #1D1B33;
+      color: white;
+    }
+  </style>
 </head>
 <body>
 
-  <div class="order-container">
-    <!-- VENSTRE: Kontaktinfo -->
-    <div class="order-info">
-      <h2>Kontakt</h2>
-      <p><strong>E-post:</strong><br> oddendesign@gmail.com</p>
-      <p><strong>Instagram:</strong><br>
-        <a href="https://www.instagram.com/oddendesiign/" target="_blank">@oddendesiign</a>
-      </p>
-      <p><strong>Adresse:</strong><br> Handelshøyskolen BI<br>Oslo, Norge</p>
+  <div class="product-order-wrapper">
+    <!-- VENSTRE: Produktvisning -->
+    <div class="product-preview">
+      {% if product.image %}
+        <img src="{{ product.image.url }}" alt="{{ product.title }}">
+      {% endif %}
+      <h3>{{ product.title }}</h3>
+      <p>{{ product.description }}</p>
+      <p><strong>{{ product.price }} kr</strong></p>
     </div>
 
     <!-- HØYRE: Skjema -->
     <div class="order-form">
       <h2>Kjøp ferdig logo</h2>
-      <p><strong>{{ product.title }}</strong></p>
-      <p>Pris: <strong>{{ product.price }} kr</strong></p>
 
       <form method="post">
         {% csrf_token %}
@@ -40,13 +86,17 @@
         <div class="form-group">
           <label>
             {{ form.agree_to_terms }} Jeg godtar
-            <a href="/betingelser" target="_blank">betingelsene</a>
+            <a href="/terms/" target="_blank">betingelsene</a>
           </label>
         </div>
 
         <div class="form-group">{{ form.total_price.label_tag }} {{ form.total_price }}</div>
 
         <button type="submit" class="submit-btn">Kjøp nå</button>
+
+        <div class="form-group">
+          <a href="{% url 'outlet' %}" class="back-btn">← Tilbake til outlet</a>
+        </div>
       </form>
     </div>
   </div>

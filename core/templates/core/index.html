@@ -1,10 +1,393 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="no">
 <head>
-    <meta charset="UTF-8">
-    <title>Oddendesiign</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+
+  <!-- ⭐️ TITTEL FOR NETTSIDE & IKON AV LOGO -->
+  <title>oddendesiign</title>
+  <link rel="icon" href="https://i.postimg.cc/QC5Kk0dp/oddendesign-large-submark.png">
+
+  <!-- 🌃 CSS FIL -->
+  <link rel="stylesheet" href="{% static 'css/index.css' %}">
+
+  <!-- ✏️ FONTS -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
+  <!-- ⭐️ IKONER FRA FONTAWESOME -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <script src="https://kit.fontawesome.com/3971c08e86.js" crossorigin="anonymous"></script>
+
+  <!-- ↔️ FOR SWIPE I JS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
 </head>
 <body>
-    <h1>Velkommen til Oddendesiign!</h1>
+    <section id="header">
+        <a href="index.html"><img src="{% static 'images/oddendesiign_primary logo.svg' %}" class="logo" alt=""></a> <!-- LOGO -->
+    
+            <nav>
+                <div class="navbar" id="navBar">
+                    <i class="fa fa-times" onclick="hideMenu()"></i>
+                    <ul>
+                        <li><a class="active" href="{% url 'index' %}">HJEM</a></li>
+                        <li><a href="{% url 'order' %}">BESTILL LOGO</a></li>
+                        <li><a href="{% url 'outlet' %}">OUTLET-LOGOER</a></li>
+                        <li><a href="{% url 'teaser_video' %}">TEASERVIDEO</a></li>
+                        <li><a href="{% url 'faq' %}">FAQ</a></li>
+                        <li><a href="{% url 'about' %}">OM OSS</a></li>
+                        <li><a href="{% url 'contact' %}">KONTAKT</a></li>
+                        <li><a href=""><i class="fa-solid fa-bag-shopping"></i></a></li>
+                    </ul>
+                </div>
+                    <i class="fa fa-bars" onclick="showMenu()"></i>
+            </nav>
+    </section>
+
+        <section class="hero">
+            <section class="logo-slide">
+                <div class="wrapper">
+                    <i id="left" class="fa fa-chevron-left"></i>
+
+                    <div class="swiper mySwiper">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide"><img src="https://i.postimg.cc/6QkGfn79/HR-2025.png" alt="img"></div>
+                            <div class="swiper-slide"><img src="https://i.postimg.cc/bvDtn3wC/LTTG-2022.png" alt="img"></div>
+                            <div class="swiper-slide"><img src="https://i.postimg.cc/5yZGxPyh/BTG-2021.png" alt="img"></div>
+                            <div class="swiper-slide"><img src="https://i.postimg.cc/pLyhNqzW/SD-2022.png" alt="img"></div>
+                            <div class="swiper-slide"><img src="https://i.postimg.cc/2S5vkzRf/HFT-2022.png" alt="img"></div>
+                            <div class="swiper-slide"><img src="https://i.postimg.cc/zBTHtvWT/OL-2022.png" alt="img"></div>
+                            <div class="swiper-slide"><img src="https://i.postimg.cc/Rh96jmQy/RYG-2021.png" alt="img"></div>
+                            <div class="swiper-slide"><img src="https://i.postimg.cc/Y2fmQ4tH/SA-2022.png" alt="img"></div>
+                            <div class="swiper-slide"><img src="https://i.postimg.cc/dVSCDzwZ/TTR-2022.png" alt="img"></div>
+                            <div class="swiper-slide"><img src="https://i.postimg.cc/x1YQMCjW/AP-2022.png" alt="img"></div>
+                            <div class="swiper-slide"><img src="https://i.postimg.cc/RhR6mYgF/PD-2022.png" alt="img"></div>
+                        </div>
+                    </div>
+                    <i id="right" class="fa fa-chevron-right"></i>
+                </div>
+            </section>
+
+            <div class="hero-text">
+                <h4>Trenger dere logo til russetiden?</h4>
+                <h1>VELG MELLOM TRE FLEKSIBLE PAKKER</h1>
+                <p>Logo, teaser, filter og mer - alt i en prosess</p>
+                <a href="{% url 'order' %}" class="hero-button">KOM I GANG</a>
+            </div>
+        </section>
+    </section>
+
+    <section class="packs">
+    <div class="packs-container">
+        <div class="row">
+        <div class="packs-col">
+            <div class="content">
+            <h3>🎨 LOGOPAKKE</h3>
+            <p>
+                Vil dere ha en unik russelogo laget helt fra bunnen av, basert på deres navn og konsept?
+                Vi tilbyr tre forskjellige logopakker: Light, Luxe og Supreme slik at dere kan velge det som passer budsjett og behov.
+                Enten dere bare trenger en clean logo, eller vil ha hele pakken med Snapchat-filter, klær og teaservideo, vi fikser det.
+            </p>
+            </div>
+        </div>
+
+        <div class="packs-col">
+            <div class="content">
+            <h3>🎬 TEASERVIDEO</h3>
+            <p>
+                Skap hype før slipp og vis hvem dere er med en profesjonell teaservideo!
+                Velg mellom klassisk 60 sekunders teaser, nedtelling eller en custom versjon hvor dere sender inn egne klipp.
+                Perfekt til Instagram, TikTok og visning på fest denne videoen setter standarden.
+            </p>
+            </div>
+        </div>
+
+        <div class="packs-col">
+            <div class="content">
+            <h3>🛍️ OUTLETLOGO</h3>
+            <p>
+                Trenger dere logo fort og billig? I vår outlet finner dere ferdiglagde russelogoer klare til bruk – selges kun én gang,
+                så her gjelder det å være tidlig ute. Perfekt for dere som er sent ute eller bare vil ha noe fett uten å vente.
+            </p>
+            </div>
+        </div>
+        </div>
+    </div>
+    </section>
+
+
+
+    <section class="info">
+    <div class="info-container">
+
+        <div class="info-left">
+        <h2>Vi tilbyr tre logopakker <br> slik at dere slipper å betale for mer enn<br> dere trenger!</h2>
+        </div>
+        <div class="info-right">
+        <p>
+            Logo Light passer for dere som vil ha en enkel og clean logo, raskt og rimelig.<br><br>
+            Logo Luxe gir mer fleksibilitet med skriftlogo, klær og Snapchat-filter og rabatt på teaservideo.<br><br>
+            Logo Supreme er for dere som vil ha alt: klær, filter, stories, custom video og full kontroll.<br><br>
+        </p>
+        </div>
+
+        <h2 class="price-heading">
+        <i class="fa-solid fa-tags"></i>
+        VÅRE LOGOPAKKER
+        </h2>
+        <div class="pricing-cards">
+        <div class="card" style="--color: #f7b571;">
+            <i class="fa-solid fa-bolt"></i>
+            <div class="title">LOGO LIGHT</div>
+            <div class="card-content">
+            <ul>
+                <li>Hovedlogo</li>
+                <li>Initialer</li>
+                <li>Levering i SVG</li>
+                <li>Rask levering</li>
+            </ul>
+            <form action="{% url 'order' %}">
+              <button type="submit" class="">BESTILL</button>
+            </form>
+
+            </div>
+        </div>
+
+        <div class="card" style="--color: #fff1ab;">
+            <i class="fa-solid fa-star"></i>
+            <div class="title">LOGO LUXE</div>
+            <div class="card-content">
+            <ul>
+                <li>Hovedlogo</li>
+                <li>Initialer</li>
+                <li>Skriftlogo</li>
+                <li>1 design til t-skjorte/crew</li>
+                <li>Snapchat-filter</li>
+                <li>Mulighet for teaservideo (rabattert)</li>
+                <li>Levering i SVG</li>
+            </ul>
+            <form action="{% url 'order' %}">
+              <button type="submit" class="">BESTILL</button>
+            </form>
+            </div>
+        </div>
+
+        <div class="card" style="--color: #fef2e6;">
+            <i class="fa-solid fa-gem"></i>
+            <div class="title">LOGO SUPREME</div>
+            <div class="card-content">
+            <ul>
+                <li>Hovedlogo</li>
+                <li>Initialer</li>
+                <li>Skriftlogo</li>
+                <li>2 design til t-skjorte/crew</li>
+                <li>Hettegenser + bukse-design</li>
+                <li>Snapchat-filter</li>
+                <li>Instagram highlights-bokstaver</li>
+                <li>Teaservideo eller custom video</li>
+                <li>Levering i SVG</li>
+            </ul>
+            <form action="{% url 'order' %}">
+              <button type="submit" class="">BESTILL</button>
+            </form>
+            </div>
+        </div>
+        </div>
+
+    </div>
+    </section>
+
+<section class="about-section">
+  <div class="about-overlay">
+    <div class="about-content">
+      <h2>Om oss</h2>
+      <p> Oddendesiign lager logoer og grafisk innhold for russ som vil ha noe mer enn det standard opplegget. Vi bygger alt fra bunnen av ingen maler, ingen snarveier. Hos oss handler det om å lage design som faktisk passer navnet, konseptet og stilen deres.
+        Vi tilbyr både ferdige pakkeløsninger, teaservideo, logo og filter  og har også en outlet for dere som vil ha noe klart med en gang. Enten dere er tidlig ute eller ute i siste liten, får dere rask levering og tett oppfølging underveis.
+        Oddendesiign drives med fokus på godt håndverk, personlig kontakt og et ønske om å levere noe som gruppa deres faktisk kan være stolte av.
+      </p>
+      <a href="{% url 'about' %}" class="about-btn">LES MER</a>
+    </div>
+  </div>
+</section>
+
+<!-- OUTLET -->
+
+  <section class="outlet">
+  <h1>OUTLET LOGOER</h1>
+  <p>Klar logo, klar til bruk. Outlet-logoer er ferdiglagde design som selges kun én gang. Perfekt for dere som vil ha noe fett raskt og rimelig!</p>
+
+  <div class="outlet-card">
+    {% for product in products %}
+      <div class="outlet-card-box" style="--color: #fff;">
+        {% if product.image %}
+          <img src="{{ product.image.url }}" alt="{{ product.title }}">
+        {% endif %}
+        <div class="des">
+          <h5>{{ product.title }}</h5>
+          <h4>{{ product.price }} kr</h4>
+          <p>{{ product.description }}</p>
+        </div>
+        <a href="{% url 'outlet_order' product.id %}"><i class="fa-solid fa-bag-shopping"></i></a>
+      </div>
+    {% empty %}
+      <p class="empty">Ingen ferdiglagde logoer tilgjengelig for salg.</p>
+    {% endfor %}
+  </div>
+</section>
+
+<!-- TEASERVIDEO -->
+
+<section class="teaser-section">
+  <h2>TEASER VIDEO</h2>
+  <p>Teaservideo er for dere som vil bygge stemning før navneslipp, teaser merch eller vise frem hvem dere er på deres måte. Vi tilbyr tre alternativer: 
+    <br>en klassisk 60 sekunders teaser, en 3-2-1 nedtelling med bilde eller video, eller en custom video hvor dere sender inn egne klipp. Alt tilpasses
+    <br>konseptet og logoen deres, og videoen leveres ferdig redigert klar til å brukes på Instagram, TikTok eller vises på vors.
+    <br>Ingen behov for å filme selv (med mindre dere vil), og null styr med redigering.
+    <br>Dere velger vi fikser.
+
+  <div class="video-wrapper">
+    <video class="teaser-video" src="{% static 'videos/Haldengutta 2023.mp4' %}" autoplay muted loop controls></video>
+    <video class="teaser-video" src="{% static 'videos/Instagram Video 2021.mp4' %}" autoplay muted loop controls></video>
+  </div>
+  <a href="{% url 'teaser_video' %}" class="teaser-btn">BESTILL TEASERVIDEO</a>
+</section>
+
+<section class="faq-section">
+  <div class="faq-wrapper">
+    <h2 class="faq-heading">Ofte stilte spørsmål</h2>
+    <div class="faq-list">
+      {% for faq in faqs %}
+        <div class="faq-box">
+          <button onclick="toggleFAQ({{ faq.id }})" class="faq-toggle">
+            <span>{{ faq.question }}</span>
+            <span class="faq-icons">
+              <span id="icon-plus-{{ faq.id }}">+</span>
+              <span id="icon-minus-{{ faq.id }}" class="hidden">−</span>
+            </span>
+          </button>
+          <div id="answer-{{ faq.id }}" class="faq-answer hidden">
+            <p>{{ faq.answer }}</p>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="reviews-section">
+  <h2>KUNDEOMTALER</h2>
+  <div class="carousel-wrapper">
+    
+    <button class="carousel-btn prev" onclick="prevReview()">
+      <i class="fa fa-chevron-left"></i>
+    </button>
+
+    <div class="carousel-viewport">
+      <div id="review-carousel">
+        {% for review in reviews %}
+          <div class="review-card">
+            <div class="rating">
+              {% for i in "12345"|slice:":review.rating" %}
+                <span class="star">★</span>
+              {% endfor %}
+            </div>
+            <p class="review-text">“{{ review.text }}”</p>
+            <p class="review-author">{{ review.customer.group_name }} - {{ review.created_at|date:"d.m.Y" }}</p>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+
+    <button class="carousel-btn next" onclick="nextReview()">
+      <i class="fa fa-chevron-right"></i>
+    </button>
+    
+  </div>
+</section>
+
+
+<section class="contact-section">
+  <div class="contact-container">
+    <div class="contact-info">
+      <h2>KONKTAKT OSS</h2>
+      <p><strong>E-post:</strong> <br>oddendesign@gmail.com</p>
+      <p><strong>Instagram:</strong><br>
+        <a href="https://www.instagram.com/oddendesiign/" target="_blank">@oddendesiign</a>
+      </p>
+    </div>
+
+    <div class="contact-form">
+      <h2>SEND EN MELDING</h2>
+      <form method="post">
+        {% csrf_token %}
+        {{ form.non_field_errors }}
+
+        <div class="form-group">
+          {{ form.full_name.label_tag }}{{ form.full_name }}
+        </div>
+        <div class="form-group">
+          {{ form.email.label_tag }}{{ form.email }}
+        </div>
+        <div class="form-group">
+          {{ form.subject.label_tag }}{{ form.subject }}
+        </div>
+        <div class="form-group">
+          {{ form.message.label_tag }}{{ form.message }}
+        </div>
+
+        <button type="submit" class="submit-button">Send</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="footer-container">
+    <div class="footer-row">
+      <div class="footer-col">
+        <img src="{% static 'images/oddendesiign_primary logo.svg' %}" alt="Oddendesiign logo" class="footer-logo">
+        <p>
+          Oddendesiign lager logoer, teaser-video og grafisk innhold for russ som vil ha noe unikt, håndlaget og personlig.
+        </p>
+      </div>
+      <div class="footer-col">
+        <h6>Produkter</h6>
+        <p><a href="/order/">Logopakker</a></p>
+        <p><a href="/teaservideo/">Teaservideo</a></p>
+        <p><a href="/outlet/">Outlet-logoer</a></p>
+        <p><a href="/faq/">FAQ</a></p>
+      </div>
+      <div class="footer-col">
+        <h6>Nyttige lenker</h6>
+        <p><a href="/terms/">Betingelser</a></p>
+        <p><a href="/contact/">Kontakt oss</a></p>
+        <p><a href="/about/">Om oss</a></p>
+        <p><a href="https://www.instagram.com/oddendesiign/" target="_blank">Instagram</a></p>
+      </div>
+      <div class="footer-col">
+        <h6>Kontakt</h6>
+        <p><i class="fa fa-map-marker"></i> Oslo, Norge</p>
+        <p><i class="fa fa-envelope"></i> oddendesign@gmail.com</p>
+        <p><i class="fa fa-phone"></i> @oddendesiign</p>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    © 2025 Oddendesiign. All rights reserved.
+  </div>
+</footer>
+
+
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <script src="{% static 'js/index.js' defer %}"></script>
+
+
 </body>
 </html>

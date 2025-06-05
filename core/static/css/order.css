@@ -83,3 +83,21 @@ textarea {
 .submit-btn:hover {
   background-color: #1D1B33;
 }
+
+.back-btn {
+  display: inline-block;
+  margin-top: 1rem;
+  color: #1D1B33;
+  text-decoration: none;
+  font-weight: 600;
+  padding: 10px 20px;
+  border-radius: 8px;
+  background-color: transparent;
+  border: 2px solid #1D1B33;
+  transition: all 0.3s ease;
+}
+
+.back-btn:hover {
+  background-color: #1D1B33;
+  color: white;
+}
